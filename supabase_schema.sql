@@ -84,7 +84,9 @@ BEGIN
         SELECT 1 FROM information_schema.columns 
         WHERE table_name = 'exam_results' AND column_name = 'auto_submitted' AND data_type = 'boolean'
     ) THEN
+        ALTER TABLE exam_results ALTER COLUMN auto_submitted DROP DEFAULT;
         ALTER TABLE exam_results ALTER COLUMN auto_submitted TYPE SMALLINT USING (CASE WHEN auto_submitted THEN 1 ELSE 0 END);
+        ALTER TABLE exam_results ALTER COLUMN auto_submitted SET DEFAULT 0;
     END IF;
 END $$;
 
@@ -118,7 +120,9 @@ BEGIN
         SELECT 1 FROM information_schema.columns 
         WHERE table_name = 'exam_audits' AND column_name = 'is_correct' AND data_type = 'boolean'
     ) THEN
+        ALTER TABLE exam_audits ALTER COLUMN is_correct DROP DEFAULT;
         ALTER TABLE exam_audits ALTER COLUMN is_correct TYPE SMALLINT USING (CASE WHEN is_correct THEN 1 ELSE 0 END);
+        ALTER TABLE exam_audits ALTER COLUMN is_correct SET DEFAULT 0;
     END IF;
 END $$;
 
