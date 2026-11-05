@@ -7,9 +7,9 @@
 // Change this to your EC2 instance's public URL, e.g.:
 //   'http://ec2-XX-XX-XX-XX.ap-south-1.compute.amazonaws.com:3000'
 // Or if you've set up a domain/CloudFront:
-const BACKEND_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.port === '3000')
+const BACKEND_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.port === '3000' || window.location.hostname.endsWith('onrender.com'))
     ? ''
-    : (window.location.origin.includes('maapark.in') ? '' : 'https://api.maapark.in');
+    : (window.location.origin.includes('maapark.in') ? '' : 'https://maapark.onrender.com');
 
 // ─── DOM Ready ───────────────────────────────────────────────────────────────
 

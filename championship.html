@@ -2830,9 +2830,9 @@ Response time: Within 7 working days</div>
 
     <!-- JavaScript Logic -->
     <script>
-        const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.port === '3000')
+        const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.port === '3000' || window.location.hostname.endsWith('onrender.com'))
             ? ''
-            : (window.location.origin.includes('maapark.in') ? '' : 'https://api.maapark.in');
+            : (window.location.origin.includes('maapark.in') ? '' : 'https://maapark.onrender.com');
         let countdownInterval;
         let demoInterval;
         let registrationActive = true;
