@@ -1,10 +1,10 @@
 -- =====================================================================
--- MAA PARK TECHNOLOGIES — SUPABASE (POSTGRESQL) SCHEMA
+-- MAA PARK TECHNOLOGIES — SUPABASE (POSTGRESQL) SCHEMA (v2 FIXED)
 -- Compatible with Supabase PostgreSQL 15+
 -- Paste this script directly into Supabase Dashboard -> SQL Editor -> Run
 -- =====================================================================
 
--- Enable UUID extension if needed
+-- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- 1. Table: College Affiliates & SNA Welfare Ledger
@@ -53,6 +53,7 @@ CREATE INDEX IF NOT EXISTS idx_reg_status ON registrations(payment_status);
 CREATE INDEX IF NOT EXISTS idx_reg_ref ON registrations(referral_code);
 
 -- 3. Table: Exam Results & Final Scorecards
+-- Note: auto_submitted is SMALLINT (0 or 1) for seamless SQLite & PostgreSQL parity
 CREATE TABLE IF NOT EXISTS exam_results (
     id BIGSERIAL PRIMARY KEY,
     roll_number VARCHAR(64) NOT NULL UNIQUE REFERENCES registrations(roll_number) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -67,7 +68,8 @@ CREATE TABLE IF NOT EXISTS exam_results (
     certificate_id VARCHAR(64) UNIQUE,
     certificate_url TEXT,
     tab_switches INTEGER DEFAULT 0,
-    auto_submitted BOOLEAN DEFAULT FALSE,
+    auto_submitted SMALLINT DEFAULT 0,
+    attempt_count INTEGER DEFAULT 1,
     time_spent_seconds INTEGER DEFAULT 0,
     time_spent_formatted VARCHAR(32) DEFAULT '0 mins',
     exam_status VARCHAR(32) DEFAULT 'VALID', -- 'VALID', 'DISQUALIFIED', 'MANUAL_VERIFIED'
@@ -75,11 +77,25 @@ CREATE TABLE IF NOT EXISTS exam_results (
     submitted_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- In case exam_results was already created with BOOLEAN in a previous run:
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_name = 'exam_results' AND column_name = 'auto_submitted' AND data_type = 'boolean'
+    ) THEN
+        ALTER TABLE exam_results ALTER COLUMN auto_submitted TYPE SMALLINT USING (CASE WHEN auto_submitted THEN 1 ELSE 0 END);
+    END IF;
+END $$;
+
+ALTER TABLE exam_results ADD COLUMN IF NOT EXISTS attempt_count INTEGER DEFAULT 1;
+
 CREATE INDEX IF NOT EXISTS idx_results_roll ON exam_results(roll_number);
 CREATE INDEX IF NOT EXISTS idx_results_score ON exam_results(score DESC);
 CREATE INDEX IF NOT EXISTS idx_results_status ON exam_results(exam_status);
 
 -- 4. Table: Itemized Question-by-Question Audit
+-- Note: is_correct is SMALLINT (1 or 0) for seamless SQLite & PostgreSQL parity
 CREATE TABLE IF NOT EXISTS exam_audits (
     id BIGSERIAL PRIMARY KEY,
     roll_number VARCHAR(64) NOT NULL REFERENCES registrations(roll_number) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -90,10 +106,23 @@ CREATE TABLE IF NOT EXISTS exam_audits (
     question_id VARCHAR(32),
     candidate_answer VARCHAR(32),
     correct_answer VARCHAR(32),
-    is_correct BOOLEAN DEFAULT FALSE,
+    is_correct SMALLINT DEFAULT 0,
     marks_awarded NUMERIC(4, 2) DEFAULT 0.00,
-    created_at TIMESTAMPTZ DEFAULT NOW()
+    timestamp TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- In case exam_audits was already created with BOOLEAN or created_at:
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns 
+        WHERE table_name = 'exam_audits' AND column_name = 'is_correct' AND data_type = 'boolean'
+    ) THEN
+        ALTER TABLE exam_audits ALTER COLUMN is_correct TYPE SMALLINT USING (CASE WHEN is_correct THEN 1 ELSE 0 END);
+    END IF;
+END $$;
+
+ALTER TABLE exam_audits ADD COLUMN IF NOT EXISTS timestamp TIMESTAMPTZ DEFAULT NOW();
 
 CREATE INDEX IF NOT EXISTS idx_audit_roll ON exam_audits(roll_number);
 CREATE INDEX IF NOT EXISTS idx_audit_qno ON exam_audits(question_number);
@@ -266,4 +295,3 @@ LEFT JOIN payments p ON (
 LEFT JOIN exam_results er ON er.roll_number = r.roll_number
 GROUP BY r.college
 ORDER BY total_students DESC;
-
