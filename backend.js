@@ -230,12 +230,16 @@ async function start() {
     console.log(`   💚 Health check: http://localhost:${PORT}/health`);
   });
 
-  // Attempt database connection in background
-  try {
-    await connectDB();
-    console.log('✅ MongoDB Atlas connected successfully');
-  } catch (err) {
-    console.warn('⚠️ MongoDB connection warning (check IP whitelist in Atlas if using live DB):', err.message);
+  // Attempt database connection in background if configured
+  if (process.env.MONGODB_URI) {
+    try {
+      await connectDB();
+      console.log('✅ MongoDB Atlas connected successfully');
+    } catch (err) {
+      console.warn('⚠️ MongoDB connection warning (check IP whitelist in Atlas if using live DB):', err.message);
+    }
+  } else {
+    console.log('⚡ High-performance SQL Database active (Registrations, Exam & Payments ready)');
   }
 
   // Initialize Automated Daily WhatsApp Channel Scheduler

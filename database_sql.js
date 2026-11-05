@@ -3,6 +3,7 @@
 // Utilizes Node.js native SQLite Engine (node:sqlite) with Prepared Statements & Connection Pooling
 
 import { DatabaseSync } from 'node:sqlite';
+import fs from 'node:fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -15,6 +16,10 @@ class DatabaseClient {
     this.db = new DatabaseSync(dbPath);
     this.db.exec('PRAGMA journal_mode = WAL;');
     this.db.exec('PRAGMA foreign_keys = ON;');
+    this.initTables();
+  }
+
+  initTables() {
     this.db.exec(`
       CREATE TABLE IF NOT EXISTS whatsapp_broadcast_logs (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,7 +33,113 @@ class DatabaseClient {
         response_payload TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
+
+      CREATE TABLE IF NOT EXISTS college_affiliates (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        referral_code VARCHAR(32) NOT NULL,
+        coordinator_name VARCHAR(128) NOT NULL,
+        role VARCHAR(64) DEFAULT 'Student Ambassador',
+        college_name VARCHAR(255) NOT NULL,
+        whatsapp VARCHAR(20) NOT NULL,
+        upi_id VARCHAR(128),
+        total_registrations INTEGER DEFAULT 0,
+        fund_accrued_inr DECIMAL(10, 2) DEFAULT 0.00,
+        payout_status VARCHAR(32) DEFAULT 'Pending',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS registrations (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        roll_number VARCHAR(64) NOT NULL UNIQUE,
+        full_name VARCHAR(128) NOT NULL,
+        whatsapp VARCHAR(20) NOT NULL,
+        email VARCHAR(128),
+        college VARCHAR(255) NOT NULL,
+        college_code VARCHAR(32),
+        course VARCHAR(64),
+        year_level VARCHAR(32),
+        state VARCHAR(64) DEFAULT 'Assam',
+        pricing_tier VARCHAR(32) DEFAULT 'Tier 1',
+        fee_paid_inr DECIMAL(10, 2) DEFAULT 99.00,
+        referral_code VARCHAR(32),
+        sna_welfare_inr DECIMAL(10, 2) DEFAULT 15.00,
+        razorpay_order_id VARCHAR(64),
+        razorpay_payment_id VARCHAR(64),
+        payment_status VARCHAR(32) DEFAULT 'pending',
+        registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        raw_metadata TEXT
+      );
+
+      CREATE TABLE IF NOT EXISTS exam_results (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        roll_number VARCHAR(64) NOT NULL UNIQUE,
+        full_name VARCHAR(128) NOT NULL,
+        college VARCHAR(255),
+        score DECIMAL(5, 2) DEFAULT 0.00,
+        correct_count INTEGER DEFAULT 0,
+        incorrect_count INTEGER DEFAULT 0,
+        unattempted_count INTEGER DEFAULT 0,
+        percentage DECIMAL(5, 2) DEFAULT 0.00,
+        state_rank VARCHAR(32) DEFAULT '--',
+        certificate_id VARCHAR(64) UNIQUE,
+        certificate_url TEXT,
+        tab_switches INTEGER DEFAULT 0,
+        auto_submitted BOOLEAN DEFAULT 0,
+        attempt_count INTEGER DEFAULT 1,
+        time_spent_seconds INTEGER DEFAULT 0,
+        time_spent_formatted VARCHAR(32) DEFAULT '0 mins',
+        exam_status VARCHAR(32) DEFAULT 'VALID',
+        disqualification_reason TEXT,
+        submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS exam_audits (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        roll_number VARCHAR(64) NOT NULL,
+        candidate_name VARCHAR(128),
+        college VARCHAR(255),
+        question_number INTEGER NOT NULL,
+        section VARCHAR(8) DEFAULT 'A',
+        question_id VARCHAR(32),
+        candidate_answer VARCHAR(32),
+        correct_answer VARCHAR(32),
+        is_correct BOOLEAN DEFAULT 0,
+        marks_awarded DECIMAL(4, 2) DEFAULT 0.00,
+        timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+
+      CREATE TABLE IF NOT EXISTS payments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        payment_id VARCHAR(64) NOT NULL UNIQUE,
+        order_id VARCHAR(64),
+        amount_inr DECIMAL(10, 2) DEFAULT 99.00,
+        currency VARCHAR(8) DEFAULT 'INR',
+        customer_phone VARCHAR(20),
+        customer_email VARCHAR(128),
+        roll_number VARCHAR(64),
+        candidate_name VARCHAR(128),
+        college VARCHAR(255),
+        payment_status VARCHAR(32) DEFAULT 'Captured',
+        payment_date VARCHAR(32),
+        raw_payload TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
     `);
+
+    // Auto-seed if registrations table is empty
+    try {
+      const regCount = this.db.prepare('SELECT COUNT(*) as c FROM registrations').get();
+      if (!regCount || regCount.c === 0) {
+        const seedsPath = path.join(__dirname, 'seeds.sql');
+        if (fs.existsSync(seedsPath)) {
+          const seedsSQL = fs.readFileSync(seedsPath, 'utf8');
+          this.db.exec(seedsSQL);
+          console.log('✅ Auto-seeded registrations and affiliates into SQL database');
+        }
+      }
+    } catch (e) {
+      console.warn('⚠️ Auto-seed notice:', e.message);
+    }
   }
 
   // Generic Query Runners
