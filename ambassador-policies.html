@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+  <title>Legal Terms, Privacy Policy & Campaign Rules | MaaPark Ambassador Hunt</title>
+  <meta name="description" content="Official Terms & Conditions, Privacy Policy, and Refund Policy for MaaPark Brand Ambassador & App Promotion Campaign (2026–2027).">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-dark: #1557b0;
+      --secondary: #1e8e3e;
+      --accent: #e37400;
+      --text: #202124;
+      --text-body: #3c4043;
+      --text-muted: #5f6368;
+      --border: #dadce0;
+      --bg: #ffffff;
+      --bg-subtle: #f8f9fa;
+      --radius-card: 14px;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-subtle);
+      color: var(--text-body);
+      line-height: 1.7;
+      padding-bottom: 60px;
+    }
+
+    .legal-navbar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .brand-link img {
+      height: 32px;
+      border-radius: 6px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 8px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.86rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover { background: #e8f0fe; color: var(--primary); }
+
+    .container {
+      max-width: 1000px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+
+    .legal-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 40px;
+      box-shadow: 0 1px 3px rgba(60,64,67,0.06);
+    }
+
+    @media (max-width: 768px) {
+      .legal-card { padding: 24px 18px; }
+    }
+
+    .legal-title {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .legal-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .toc-nav {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+    }
+
+    .toc-nav h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .toc-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .toc-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .toc-links a:hover { text-decoration: underline; }
+
+    .legal-section {
+      margin-bottom: 36px;
+      scroll-margin-top: 80px;
+    }
+
+    .legal-section h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+
+    .legal-section h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 16px 0 6px 0;
+    }
+
+    .legal-section p {
+      font-size: 0.94rem;
+      margin-bottom: 12px;
+      color: var(--text-body);
+    }
+
+    .legal-section ul {
+      padding-left: 22px;
+      margin-bottom: 14px;
+      font-size: 0.93rem;
+    }
+
+    .legal-section li {
+      margin-bottom: 6px;
+    }
+
+    .callout-box {
+      background: #e8f0fe;
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin: 16px 0;
+    }
+
+    .callout-warn {
+      background: #fef7e0;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin: 16px 0;
+    }
+
+    .officer-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="legal-navbar">
+    <a href="/index.html" class="brand-link">
+      <img src="maa-park-logo.jpg" alt="MaaPark Logo">
+      <span>MaaPark Legal & Compliance</span>
+    </a>
+    <a href="/ambassador" class="btn-back">
+      <i class="fa-solid fa-arrow-left"></i> Back to Ambassador Hunt
+    </a>
+  </header>
+
+  <main class="container">
+    <div class="legal-card">
+      <h1 class="legal-title">Official Campaign Terms, Privacy Policy & Policies</h1>
+      <div class="legal-meta">
+        <span><strong>Campaign:</strong> MaaPark Brand Ambassador & Mobile App Promotion Hunt (2026–2027)</span>
+        <span><strong>Governing Entity:</strong> MaaPark Technologies Pvt. Ltd. (maapark.in)</span>
+        <span><strong>Effective Date:</strong> September 1, 2026</span>
+      </div>
+
+      <!-- Quick TOC -->
+      <nav class="toc-nav">
+        <h3><i class="fa-solid fa-list-check"></i> Navigation Index</h3>
+        <ul class="toc-links">
+          <li><a href="#terms">1. Campaign Terms & 1% Equity</a></li>
+          <li><a href="#privacy">2. Privacy Policy & DPDP 2023</a></li>
+          <li><a href="#fee-refund">3. ₹499 Fee & Refund Policy</a></li>
+          <li><a href="#integrity">4. Assessment Code of Conduct</a></li>
+          <li><a href="#certificates">5. Certificate Lock & Issuance</a></li>
+          <li><a href="#grievance">6. Grievance Redressal</a></li>
+        </ul>
+      </nav>
+
+      <!-- SECTION 1: TERMS & CONDITIONS -->
+      <section class="legal-section" id="terms">
+        <h2><i class="fa-solid fa-scale-balanced" style="color:var(--primary);"></i> 1. Official Terms & Conditions (Governing Campaign & 1% Equity Award)</h2>
+        
+        <h3>1.1 Eligibility & Jurisdiction</h3>
+        <p>
+          The MaaPark Brand Ambassador & App Promotion Hunt 2026–2027 ("Campaign") is organized by <strong>MaaPark Technologies Pvt. Ltd.</strong> ("Company"). Participation is open to individuals who are:
+        </p>
+        <ul>
+          <li>Citizens or legal permanent residents of the Republic of India;</li>
+          <li>Aged eighteen (18) years or older at the time of registration;</li>
+          <li>Enrolled in or graduated from recognized colleges, universities, healthcare institutions, or working professionals with interest in digital health advocacy.</li>
+        </ul>
+
+        <h3>1.2 The 1% Equity Award & 3-Year Vesting Schedule</h3>
+        <p>
+          The selected Brand Ambassador will be awarded <strong>1% (one percent) equity</strong> in MaaPark Technologies (or designated operating entity), structured strictly under the following mandatory terms:
+        </p>
+        <ul>
+          <li><strong>Vesting Schedule:</strong> The 1% equity will vest linearly over a period of <strong>three (3) years</strong> with annual milestone reviews, following execution of a formal Advisor / Ambassador Stock Agreement.</li>
+          <li><strong>Deliverables & Scope of Role:</strong> The Ambassador will represent MaaPark at regional health seminars, college campuses, maternal health awareness drives, social media broadcasts, and community outreach campaigns for the MaaPark Mobile App.</li>
+          <li><strong>No Guaranteed Employment:</strong> Registration, participation, and completion of the assessment evaluation do not create any employer-employee relationship or guarantee of employment.</li>
+        </ul>
+
+        <div class="callout-box">
+          <strong><i class="fa-solid fa-circle-info"></i> Selection Transparency:</strong>
+          Final selection of the Brand Ambassador is based on the composite evaluation of: (1) Step 3 Vision & Background essays, (2) Step 4 40-MCQ Assessment Score, and (3) a short 10-minute online video interview with the Top 10 finalists. The decision of the MaaPark Selection Committee is final, conclusive, and legally binding.
+        </div>
+
+        <h3>1.3 Campaign Milestones</h3>
+        <ul>
+          <li><strong>Campaign Run:</strong> Active for 3 months until late December 2026.</li>
+          <li><strong>Test Score Display:</strong> Displays <em>strictly raw score</em> (e.g. "Score: 34/40") immediately after completing Step 4. No pass/fail or ranking decision is final until conclusion of video interviews.</li>
+          <li><strong>Grand Winner Announcement:</strong> <strong>1 January 2027</strong> on <code>maapark.in</code>.</li>
+          <li><strong>E-Certificate Availability:</strong> Official certificates remain locked until <strong>10 January 2027</strong>.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 2: PRIVACY POLICY -->
+      <section class="legal-section" id="privacy">
+        <h2><i class="fa-solid fa-user-shield" style="color:var(--secondary);"></i> 2. Privacy Policy (DPDP Act 2023 & IT Act 2000 Compliance)</h2>
+        
+        <p>
+          MaaPark Technologies respects and protects your fundamental right to privacy in full compliance with the <strong>Digital Personal Data Protection (DPDP) Act 2023</strong> and the <strong>Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011</strong>.
+        </p>
+
+        <h3>2.1 Data We Collect</h3>
+        <ul>
+          <li><strong>Identity Data:</strong> Full legal name, unique candidate ID (<code>MP-AMB-2026-XXXX</code>).</li>
+          <li><strong>Contact Information:</strong> Mobile telephone number (authenticated via OTP), verified email address, city, and state of residence.</li>
+          <li><strong>Profile & Professional Data:</strong> Educational background, college or institution name, current professional role, social media profile links (Instagram, LinkedIn, YouTube).</li>
+          <li><strong>Qualitative Assessment Insights:</strong> Candidate bio, app promotion strategy, maternal healthcare perspectives, and 40-MCQ assessment answers.</li>
+          <li><strong>Transaction Records:</strong> Razorpay / gateway payment order ID, payment transaction ID, timestamp, and generated promotional activation codes. (MaaPark does <em>never</em> store credit/debit card numbers or bank passwords).</li>
+        </ul>
+
+        <h3>2.2 Purpose & Use of Data</h3>
+        <p>
+          Your personal data is strictly processed to:
+        </p>
+        <ul>
+          <li>Authenticate your candidate registration and dispatch security verification OTPs;</li>
+          <li>Process assessment evaluations and compile objective scoring dossiers for selection;</li>
+          <li>Provision and deliver your 1-Year Free Premium subscription code for the MaaPark Mobile App;</li>
+          <li>Generate and issue cryptographically verifiable PDF advocacy certificates;</li>
+          <li>Contact Top 10 shortlisted finalists for scheduling video interviews.</li>
+        </ul>
+
+        <div class="callout-box">
+          <strong><i class="fa-solid fa-lock"></i> Strict Non-Disclosure Commitment:</strong>
+          MaaPark Technologies does <strong>never</strong> sell, rent, lease, or monetize your personal or health data to commercial ad brokers, insurance companies, or unauthorized third parties.
+        </div>
+      </section>
+
+      <!-- SECTION 3: FEE & REFUND POLICY -->
+      <section class="legal-section" id="fee-refund">
+        <h2><i class="fa-solid fa-receipt" style="color:var(--accent);"></i> 3. Fee Structure & Payment / Refund Policy (Razorpay Compliant)</h2>
+        
+        <h3>3.1 Fee Breakdown (₹499 Non-Refundable Evaluation Fee)</h3>
+        <p>
+          Every registered candidate contributes an all-inclusive evaluation and service fee of <strong>₹499 (Rupees Four Hundred and Ninety-Nine only)</strong>. This fee covers:
+        </p>
+        <ul>
+          <li><strong>Candidate Evaluation & Assessment Processing:</strong> Secure test room provisioning, anti-cheating tab monitoring, and panel dossier review;</li>
+          <li><strong>1-Year Free Premium Access to the MaaPark Mobile App:</strong> Complete access to priority gynecologist tele-consultations, period tracking, and maternal tracking tools (valued at ₹1,999, included at zero additional cost);</li>
+          <li><strong>Verifiable Certified Advocacy Credential:</strong> Official cryptographic PDF certificate with verification QR code.</li>
+        </ul>
+
+        <h3>3.2 Non-Refundable Nature</h3>
+        <div class="callout-warn">
+          <strong><i class="fa-solid fa-triangle-exclamation"></i> Mandatory Notice:</strong>
+          Payment of the ₹499 fee is strictly <strong>non-refundable</strong> once processed. Because candidate enrollment immediately grants server-side test provisioning, generates a unique candidate credential ID, and delivers an instant 1-Year Free Premium App promo code, no refund requests will be entertained on grounds of change of mind, failure to take the exam, or non-selection for the equity award.
+        </div>
+
+        <h3>3.3 Failed Transactions & Duplicate Deductions</h3>
+        <p>
+          In the event of a technical disruption where a candidate's bank account is debited multiple times for a single registration:
+        </p>
+        <ul>
+          <li>The excess duplicate deduction will be automatically refunded by our payment gateway (Razorpay / Cashfree) back to the originating bank account or card within <strong>5 to 7 business days</strong>.</li>
+          <li>Candidates may notify our billing desk at <code>support@maapark.in</code> with the transaction reference number (UTR) for prompt resolution.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 4: ASSESSMENT CODE OF CONDUCT -->
+      <section class="legal-section" id="integrity">
+        <h2><i class="fa-solid fa-shield-halved" style="color:var(--primary);"></i> 4. Assessment Code of Conduct & Anti-Cheating Policy</h2>
+        
+        <p>
+          MaaPark upholds the highest standards of medical and academic ethics. The 25-minute online assessment is administered under strict algorithmic oversight:
+        </p>
+        <ul>
+          <li><strong>Single Active Browser Tab Lock:</strong> Candidates must keep the test tab active and focused. Switching tabs, minimizing windows, or navigating away is detected and logged by our client-server audit engine. Excessive tab switching may result in score penalization or profile invalidation.</li>
+          <li><strong>25-Minute Hard Time Limit:</strong> Assessment timer is synced with server timestamps. Upon expiration of the 25:00 countdown, the exam room automatically finalizes and logs all current responses.</li>
+          <li><strong>Plagiarism & Ghostwriting Prohibited:</strong> Qualitative responses in Step 3 must be the original creative work of the candidate. Use of unauthorized automated AI scraping bots to spam responses is strictly grounds for immediate disqualification.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 5: CERTIFICATES -->
+      <section class="legal-section" id="certificates">
+        <h2><i class="fa-solid fa-certificate" style="color:#8e24aa;"></i> 5. E-Certificate Issuance & Lock Policy</h2>
+        
+        <p>
+          Official credentials for the designation of <strong>"Certified Maternal & Women’s Health Advocate"</strong> are governed by the following schedule:
+        </p>
+        <ul>
+          <li><strong>Scheduled Release Date:</strong> Certificates will remain locked and will unlock for direct download starting on <strong>10 January 2027</strong>.</li>
+          <li><strong>Verification & Validity:</strong> Each certificate contains an indelible SHA-256 digital verification hash, candidate roll number, and live online QR verification link hosted on <code>maapark.in</code>.</li>
+        </ul>
+      </section>
+
+      <!-- SECTION 6: GRIEVANCE REDRESSAL -->
+      <section class="legal-section" id="grievance">
+        <h2><i class="fa-solid fa-building-shield" style="color:var(--text);"></i> 6. Grievance Redressal & Legal Contact</h2>
+        
+        <p>
+          In accordance with the Information Technology Act 2000 and rules made thereunder, the contact details of the Grievance Officer for MaaPark Technologies are provided below:
+        </p>
+
+        <div class="officer-card">
+          <div>
+            <strong>Grievance & Compliance Officer:</strong><br>
+            Legal & Regulatory Department<br>
+            MaaPark Technologies Pvt. Ltd.
+          </div>
+          <div>
+            <strong>Registered Address:</strong><br>
+            Guwahati, Assam — 781006, India<br>
+            Website: <a href="https://maapark.in" target="_blank">maapark.in</a>
+          </div>
+          <div>
+            <strong>Direct Communication:</strong><br>
+            Email: <a href="mailto:support@maapark.in">support@maapark.in</a><br>
+            Legal: <a href="mailto:legal@maapark.in">legal@maapark.in</a>
+          </div>
+        </div>
+
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-top:20px;">
+          * Disputes arising in connection with the Campaign or these Terms shall be subject to the exclusive jurisdiction of the competent courts in Guwahati, Assam, India.
+        </p>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>

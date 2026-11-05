@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Maa Park Official Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>MaaCare by Maa Park — India's Most Complete Maternal & Women's Health Platform</title>
+    <meta name="keywords" content="MaaCare, Maa Park, maternal health app, pregnancy tracker, period tracker, home nurse, women health India">
+    <meta name="description"
+        content="MaaCare is a comprehensive maternal health app by Maa Park, providing resources, doctor consultations, and features for motherhood.">
+    <!-- Google Fonts: Inter & Roboto matching Championship Portal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=3.7-secure-locked">
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       MAACARE — GOOGLE UI UNIFIED DESIGN SYSTEM
+       (Matching National Nursing Championship Portal)
+       - Google Blue: #1a73e8 (Primary Action / Highlights)
+       - Google Green: #1e8e3e (Verified / Health / Secondary)
+       - Google Amber: #f9ab00 / #e37400 (Alerts / Badges)
+       - Google Red: #d93025 (Urgent / Critical)
+       - Google Surfaces: #ffffff (Canvas/Cards), #f8f9fa (Subtle)
+       - Google Borders: #dadce0
+       - Google Typography: #202124 (Headings), #3c4043 (Body), #5f6368 (Muted)
+    ═══════════════════════════════════════════════════ */
+    :root {
+      --primary:       #1a73e8;
+      --primary-light: #e8f0fe;
+      --primary-dark:  #1557b0;
+      --primary-hover: #1557b0;
+      --secondary:     #1e8e3e;
+      --secondary-light: #e6f4ea;
+      --accent:        #e37400;
+      --accent-light:  #fef7e0;
+      --warning:       #f9ab00;
+      --warning-light: #fef7e0;
+      --danger:        #d93025;
+      --danger-light:  #fce8e6;
+      --bg:            #ffffff;
+      --bg-canvas:     #ffffff;
+      --bg-subtle:     #f8f9fa;
+      --border:        #dadce0;
+      --border-subtle: #e8eaed;
+      --text:          #202124;
+      --foreground:    #202124;
+      --text-body:     #3c4043;
+      --muted:         #5f6368;
+      --text-muted:    #5f6368;
+      --radius-card:   12px;
+      --radius-btn:    8px;
+      --shadow-sm:     0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+      --shadow-md:     0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+      --shadow-card:   0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+      --shadow-hover:  0 4px 16px rgba(60, 64, 67, 0.15);
+      --font-body:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-head:     'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    /* Reset and Clean Background Guarantee */
+    body {
+      font-family: var(--font-body) !important;
+      background-color: #ffffff !important;
+      color: #3c4043 !important;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #202124 !important;
+      font-weight: 700;
+    }
+
+    /* Urgency Sticky Header matching Championship Portal */
+    .urgency-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1001;
+      background: #ffffff !important;
+      border-bottom: 1px solid #dadce0 !important;
+      padding: 8px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+      flex-wrap: wrap;
+      box-shadow: 0 1px 2px rgba(60,64,67,0.08);
+      color: #202124 !important;
+    }
+
+    .urgency-left {
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #202124 !important;
+    }
+
+    .urgency-center {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      color: #1a73e8 !important;
+    }
+
+    .pulse-dot {
+      height: 9px;
+      width: 9px;
+      background-color: #d93025;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(217, 48, 37, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(217, 48, 37, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(217, 48, 37, 0); }
+    }
+
+    .urgency-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .limited-badge {
+      background: #fce8e6 !important;
+      color: #d93025 !important;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #fad2cf !important;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    /* Fixed Clean White Navbar */
+    .navbar {
+      position: fixed;
+      top: 0 !important;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background-color: #ffffff !important;
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid #dadce0 !important;
+      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.08) !important;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: #202124 !important;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .nav-links a:not(.btn) {
+      color: #3c4043 !important;
+      font-weight: 600;
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:not(.btn):hover {
+      color: #1a73e8 !important;
+    }
+
+    .btn-primary {
+      background: #1a73e8 !important;
+      color: #ffffff !important;
+      border: none !important;
+      border-radius: 8px !important;
+      padding: 0.55rem 1.25rem !important;
+      font-weight: 600 !important;
+      font-size: 0.92rem !important;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: var(--shadow-sm) !important;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #1557b0 !important;
+      color: #ffffff !important;
+      box-shadow: var(--shadow-md) !important;
+    }
+
+    .btn-secondary {
+      background: #ffffff !important;
+      color: #1a73e8 !important;
+      border: 1px solid #dadce0 !important;
+      border-radius: 8px !important;
+      padding: 0.55rem 1.25rem !important;
+      font-weight: 600 !important;
+      font-size: 0.92rem !important;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: #e8f0fe !important;
+      border-color: #1a73e8 !important;
+      color: #1557b0 !important;
+    }
+
+    /* Hero Section matching Championship Portal */
+    .hero {
+      position: relative;
+      padding-top: 85px !important;
+      padding-bottom: clamp(3rem, 6vw, 4.5rem) !important;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%) !important;
+      border-bottom: 1px solid #dadce0 !important;
+      overflow: hidden;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f0fe !important;
+      border: 1px solid #d2e3fc !important;
+      color: #1557b0 !important;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Shared utility classes */
+    .mc-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--primary-light); color: var(--primary); font-size: 0.8rem; font-weight: 700; padding: 0.35rem 1rem; border-radius: 999px; margin-bottom: 0.75rem; letter-spacing: 0.02em; border: 1px solid #d2e3fc; }
+    .mc-badge.teal, .mc-badge.green { background: var(--secondary-light); color: var(--secondary); border-color: #ceead6; }
+    .mc-badge.blue { background: var(--primary-light); color: var(--primary); border-color: #d2e3fc; }
+    .mc-badge.red  { background: var(--danger-light); color: var(--danger); border-color: #fad2cf; }
+    .mc-badge.navy { background: #f8f9fa; color: var(--text); border: 1px solid var(--border); }
+    
+    .mc-h2 { font-size: clamp(1.7rem, 3.5vw, 2.5rem); font-weight: 800; line-height: 1.25; color: var(--text) !important; }
+    .mc-h2.white { color: var(--text) !important; }
+    .mc-p { font-size: 1.05rem; color: var(--text-body) !important; line-height: 1.7; margin-top: 0.6rem; }
+    .mc-p.white { color: var(--text-body) !important; }
+    
+    .mc-divider { width: 56px; height: 4px; border-radius: 99px; background: var(--primary); margin: 0.8rem 0 1.6rem; }
+    .mc-divider.center { margin-left: auto; margin-right: auto; }
+    .mc-divider.teal { background: var(--secondary); }
+    .mc-divider.white { background: var(--primary); }
+    
+    .mc-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.6rem; border-radius: var(--radius-btn); font-weight: 700; font-size: 0.95rem; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s, box-shadow 0.2s, transform 0.2s; }
+    .mc-btn:hover { transform: translateY(-1px); }
+    .mc-btn-primary { background: var(--primary); color: #fff; box-shadow: 0 1px 3px rgba(60,64,67,0.3); }
+    .mc-btn-primary:hover { background: var(--primary-dark); box-shadow: 0 2px 6px rgba(60,64,67,0.25); }
+    .mc-btn-outline { background: #fff; color: var(--primary); border: 1px solid var(--border); }
+    .mc-btn-outline:hover { background: var(--primary-light); border-color: var(--primary); }
+    .mc-btn-teal { background: var(--secondary); color: #fff; }
+    .mc-btn-teal:hover { background: #137333; }
+    .mc-btn-navy { background: #fff; color: var(--text); border: 1px solid var(--border); }
+    .mc-btn-navy:hover { background: var(--bg-subtle); }
+    
+    .mc-card { background: #fff; border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 1.6rem; border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s; }
+    .mc-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: #cbd5e1; }
+    
+    /* WhatsApp Float */
+    #wa-float { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,0.4); z-index: 9999; text-decoration: none; transition: transform 0.3s; }
+    #wa-float:hover { transform: scale(1.08); }
+    #wa-float svg { width: 28px; height: 28px; fill: #fff; }
+    
+    /* Audience Checklists */
+    .feat-list { list-style: none; padding: 0; margin: 0; }
+    .feat-list li { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.55rem 0; font-size: 0.94rem; color: var(--text-body); border-bottom: 1px solid #f1f3f4; line-height: 1.5; }
+    .feat-list li:last-child { border-bottom: none; }
+    .feat-list li .li-icon { flex-shrink: 0; margin-top: 0.1rem; }
+    
+    /* Vaccination Table - Google UI */
+    .vax-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .vax-table th { background: var(--primary); color: #fff; padding: 0.75rem 1rem; text-align: left; font-weight: 700; }
+    .vax-table td { padding: 0.65rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-body); background: #fff; }
+    .vax-table tr:nth-child(even) td { background: var(--bg-subtle); }
+    
+    /* Investor Section - Google UI */
+    #investor { background: var(--bg-subtle); color: var(--text); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .investor-wrap { max-width: 1200px; margin: 0 auto; padding: clamp(3rem,6vw,5rem) clamp(1rem,5vw,2rem); }
+    .investor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    @media(max-width:900px){ .investor-grid { grid-template-columns: 1fr; } }
+    .inv-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0; }
+    .inv-stat { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; box-shadow: var(--shadow-card); }
+    .inv-stat .inv-num { font-size: 1.6rem; font-weight: 800; color: var(--primary); }
+    .inv-stat .inv-label { font-size: 0.84rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.4; font-weight: 500; }
+    .inv-box { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.2rem; box-shadow: var(--shadow-card); }
+    .inv-box h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.9rem; }
+    .inv-box ul { padding: 0; margin: 0; }
+    .inv-box li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.9rem; color: var(--text-body); padding: 0.4rem 0; list-style: none; line-height: 1.5; border-bottom: 1px solid #f1f3f4; }
+    .inv-box li:last-child { border-bottom: none; }
+    .rev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .rev-item { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 0.9rem; font-size: 0.88rem; color: var(--text-body); font-weight: 500; }
+    .inv-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem; }
+    
+    /* Footer Mega - Google UI */
+    #site-footer { background: var(--bg-subtle); color: var(--muted); border-top: 1px solid var(--border); }
+    .footer-mega { max-width: 1200px; margin: 0 auto; padding: 3.5rem clamp(1rem,5vw,2rem) 2rem; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2.5rem; }
+    @media(max-width:900px){ .footer-mega { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:520px){ .footer-mega { grid-template-columns: 1fr; } }
+    .footer-mega-col h4 { font-size: 0.88rem; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1.1rem; }
+    .footer-mega-col a, .footer-mega-col p { display: block; font-size: 0.9rem; color: var(--muted); text-decoration: none; margin-bottom: 0.6rem; transition: color 0.2s; line-height: 1.5; }
+    .footer-mega-col a:hover { color: var(--primary); }
+    .f-brand-name { font-size: 1.35rem; font-weight: 800; color: var(--text); margin-bottom: 0.45rem; }
+    .f-tagline { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.6; }
+    .f-playstore-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #ffffff; border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 1.1rem; font-size: 0.88rem; font-weight: 700; color: var(--text) !important; margin-bottom: 0.75rem; box-shadow: 0 1px 2px rgba(60,64,67,0.15); transition: background 0.2s, border-color 0.2s; }
+    .f-playstore-btn:hover { background: var(--primary-light) !important; color: var(--primary) !important; border-color: var(--primary); }
+    .f-wa-link { color: #1e8e3e !important; font-weight: 700 !important; }
+    .footer-bottom-bar { background: #ffffff; border-top: 1px solid var(--border); }
+    .footer-bottom-inner { max-width: 1200px; margin: 0 auto; padding: 1.1rem clamp(1rem,5vw,2rem); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; font-size: 0.85rem; color: var(--muted); }
+    .footer-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .f-badge { background: var(--primary-light); border: 1px solid #d2e3fc; color: var(--primary); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.75rem; border-radius: 999px; }
+
+    .mobile-menu-btn {
+      display: none;
+    }
+
+    /* Announcement Banner matching Championship Portal */
+    .postpone-banner {
+      max-width: 1200px;
+      margin: 105px auto 16px;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 100;
+    }
+    .postpone-card {
+      background: #fef7e0 !important;
+      border: 1px solid #f9ab00 !important;
+      border-radius: 12px;
+      padding: 18px 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+    .postpone-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #f9ab00;
+      color: #e37400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+    .postpone-body { flex: 1; }
+    .postpone-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #b06000;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .postpone-badge {
+      background: #f9ab00;
+      color: #202124;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 99px;
+      text-transform: uppercase;
+    }
+    .postpone-text {
+      color: #3c4043;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .postpone-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .postpone-tag {
+      background: #ffffff;
+      border: 1px solid #dadce0;
+      color: #3c4043;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    /* Mobile Responsiveness for Header & Nav */
+    @media(max-width: 992px) {
+      .navbar {
+        top: 0 !important;
+      }
+      .hero {
+        padding-top: 75px !important;
+      }
+      .mobile-menu-btn {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff !important;
+        border: 1px solid #dadce0 !important;
+        padding: 8px 12px !important;
+        border-radius: 8px !important;
+        font-size: 1.25rem !important;
+        color: #202124 !important;
+        cursor: pointer !important;
+        line-height: 1;
+      }
+      .mobile-menu-btn i {
+        color: #202124 !important;
+        font-size: 1.25rem !important;
+      }
+      .nav-links {
+        display: none !important;
+      }
+      .nav-links.active {
+        display: flex !important;
+        position: fixed;
+        top: 54px;
+        left: 0;
+        right: 0;
+        background: #ffffff !important;
+        flex-direction: column;
+        padding: 1.25rem 1.5rem 1.75rem;
+        gap: 0.6rem;
+        box-shadow: 0 12px 32px rgba(32, 33, 36, 0.16);
+        border-bottom: 2px solid #1a73e8;
+        z-index: 99999;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+      }
+      .nav-links.active a {
+        display: flex !important;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #202124 !important;
+        text-decoration: none;
+        border-bottom: 1px solid #f1f3f4;
+      }
+      .nav-links.active a:hover {
+        background: #e8f0fe !important;
+        color: #1a73e8 !important;
+      }
+      .nav-links.active .btn {
+        justify-content: center;
+        margin-top: 0.5rem;
+        color: #ffffff !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="display:inline-flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-leaf" style="color: #1e8e3e; font-size: 1.3rem;"></i>
+                <span style="color:#202124;font-weight:800;font-size:1.35rem;">Maa Park</span>
+            </a>
+            <div class="nav-links">
+                <a href="/ambassador" style="color: #e37400; font-weight: 800; display: inline-flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-gem" style="color: #f9ab00;"></i> Ambassador Hunt
+                    <span style="background: #e37400; color: #fff; font-size: 0.62rem; padding: 2px 6px; border-radius: 99px; font-weight: 900;">1% EQUITY</span>
+                </a>
+                <a href="championship.html" style="color: #1a73e8; font-weight: 800; display: inline-flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-trophy" style="color: #f9ab00;"></i> Championship 2026 
+                    <span style="background: #1a73e8; color: #fff; font-size: 0.62rem; padding: 2px 6px; border-radius: 99px; font-weight: 900;">LIVE</span>
+                </a>
+                <a href="quiz.html" style="color: #1e8e3e; font-weight: 800; display: inline-flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-bolt" style="color:#1e8e3e;"></i> Free Quiz
+                </a>
+                <a href="#about">Our App</a>
+                <a href="#mission">Mission</a>
+                <a href="#features">Features</a>
+                <a href="#team">Team</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#privacy">Privacy</a>
+                <a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="btn btn-primary">
+                    <i class="fa-brands fa-google-play"></i> Get App
+                </a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        /* Dedicated Single Mobile Navigation Handler */
+        (function() {
+            function initNav() {
+                var btn = document.getElementById('mobileMenuBtn');
+                var nav = document.querySelector('.nav-links');
+                if (!btn || !nav) return;
+
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    var willBeOpen = !nav.classList.contains('active');
+                    if (willBeOpen) {
+                        nav.classList.add('active');
+                        btn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                    } else {
+                        nav.classList.remove('active');
+                        btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                    }
+                };
+
+                nav.querySelectorAll('a').forEach(function(link) {
+                    link.onclick = function() {
+                        nav.classList.remove('active');
+                        btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                    };
+                });
+
+                document.onclick = function(e) {
+                    if (nav.classList.contains('active') && !nav.contains(e.target) && !btn.contains(e.target)) {
+                        nav.classList.remove('active');
+                        btn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                    }
+                };
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initNav);
+            } else {
+                initNav();
+            }
+        })();
+    </script>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content" style="position: relative; z-index: 2;">
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;align-items:center;">
+                <span class="hero-badge" style="margin:0;">🚀 Now Live on Google Play Store</span>
+                <span style="background:#e6f4ea;border:1px solid #ceead6;color:#1e8e3e;font-size:0.75rem;font-weight:700;padding:0.35rem 0.85rem;border-radius:999px;">v3.6.1 · Build 41</span>
+                <span style="background:#fef7e0;border:1px solid #feefc3;color:#b06000;font-size:0.75rem;font-weight:700;padding:0.35rem 0.85rem;border-radius:999px;">1,23,456 Mamas Online 💕</span>
+            </div>
+            <h1 style="color:#202124 !important;font-weight:800;line-height:1.2;margin-bottom:1rem;">You Are Never Alone, Mama 💕</h1>
+            <p style="color:#3c4043 !important;font-size:1.1rem;line-height:1.7;margin-bottom:1.5rem;">Maa Park proudly presents <strong>MaaCare</strong> – India's most comprehensive motherhood companion app, now <strong>live on Google Play Store</strong>. From AI-powered health guidance to live doctor consultations, period tracking, and a supportive community — we walk every step of your journey with you.</p>
+            <div class="hero-buttons">
+                <a href="https://play.google.com/store/apps/details?id=co.maacare.app&pcampaignid=web_share" target="_blank" class="btn btn-primary">
+                    <i class="fa-brands fa-google-play"></i> Download on Play Store
+                </a>
+                <a href="https://maacare.co" target="_blank" class="btn btn-secondary">
+                    <i class="fa-solid fa-globe"></i> Open Web App (maacare.co)
+                </a>
+                <a href="#features" class="btn btn-secondary">Explore Features</a>
+            </div>
+            <!-- Live Social Proof Bar -->
+            <div style="display:flex;flex-wrap:wrap;gap:1.2rem;margin-top:1.8rem;padding:0.9rem 1.2rem;background:#ffffff;border:1px solid #dadce0;box-shadow:0 1px 3px rgba(60,64,67,0.12);border-radius:12px;">
+                <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#3c4043;font-weight:600;"><span style="color:#1e8e3e;font-weight:800;">✓</span> AI Gemini 2.5 Flash</div>
+                <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#3c4043;font-weight:600;"><span style="color:#1e8e3e;font-weight:800;">✓</span> 100% In-App Video (ZEGOCLOUD)</div>
+                <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#3c4043;font-weight:600;"><span style="color:#1e8e3e;font-weight:800;">✓</span> Razorpay Payments</div>
+                <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.85rem;color:#3c4043;font-weight:600;"><span style="color:#1e8e3e;font-weight:800;">✓</span> Hindi + English</div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="video-mockup" style="width: 100%; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(60,64,67,0.15); border: 1px solid #dadce0; background: #ffffff;">
+                <iframe style="width: 100%; height: 540px; display: block; border: none; border-radius: 16px;" src="https://www.instagram.com/reel/Darz3eNRLh7/embed/" title="MaaCare Instagram Video" frameborder="0" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </header>
+
+  <!-- ═══════════════ NEW: STATS BAR ═══════════════ -->
+  <section id="stats-bar" class="reveal">
+    <div class="stats-bar-inner">
+      <div class="stats-bar-pill"><span class="sb-num">21+</span> Feature Modules</div>
+      <div class="stats-bar-pill"><span class="sb-num">7</span> User Roles</div>
+      <div class="stats-bar-pill">🔒 <span class="sb-num">100%</span> Encrypted</div>
+      <div class="stats-bar-pill">🏦 <span class="sb-num">₹1Cr+</span> World Bank Team</div>
+      <div class="stats-bar-pill">🏆 TNAI Award Winner</div>
+      <div class="stats-bar-pill">🏛️ NABH Advisory</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ NEW: WHO IS MAACARE FOR? ═══════════════ -->
+  <section id="audience">
+    <div class="audience-wrap">
+      <div class="reveal" style="text-align:center; margin-bottom:2rem;">
+        <span class="mc-badge">💕 Who Is MaaCare For?</span>
+        <h2 class="mc-h2">Complete Care for Every Stage</h2>
+        <div class="mc-divider center"></div>
+        <p class="mc-p">From teenage girls to new mothers, from doctors to nurses — MaaCare has a dedicated experience for everyone.</p>
+      </div>
+      <!-- Tab Nav -->
+      <div class="tab-nav reveal">
+        <button class="tab-btn active"   onclick="mcTab('teen',this)">🩸 Teen &amp; Young Women</button>
+        <button class="tab-btn"          onclick="mcTab('pregnant',this)">🤰 Pregnant Moms</button>
+        <button class="tab-btn"          onclick="mcTab('postpartum',this)">🍼 New Mothers</button>
+        <button class="tab-btn"          onclick="mcTab('child',this)">👶 Child Health</button>
+        <button class="tab-btn blue-tab" onclick="mcTab('doctor',this)">🩺 Doctors</button>
+        <button class="tab-btn teal-tab" onclick="mcTab('nurse',this)">👩‍⚕️ Nurses</button>
+      </div>
+
+      <!-- TAB 1: TEEN -->
+      <div class="tab-pane active" id="pane-teen">
+        <div class="tab-content-grid">
+          <div>
+            <span class="mc-badge">🩸 Ages 13–30 · Period Health</span>
+            <h3 class="tab-headline">Your Health. Your Privacy. 100% Yours.</h3>
+            <div class="mc-divider"></div>
+            <p class="mc-p" style="margin-bottom:1.1rem;">MaaCare's Period Tracker is designed with complete privacy and dignity — because your health data belongs only to you.</p>
+            <ul class="feat-list">
+              <li><span class="li-icon">📅</span> Smart period &amp; cycle prediction — always know what's coming</li>
+              <li><span class="li-icon">🩺</span> PCOS risk assessment with immediate doctor referral</li>
+              <li><span class="li-icon">😔</span> PMS symptom tracker — mood, cramps, bloating, cravings</li>
+              <li><span class="li-icon">🔒</span> <strong>Stealth Mode</strong> — app icon changes, separate PIN lock on period section</li>
+              <li><span class="li-icon">🙈</span> Anonymous questions to gynecologist — name is <em>NEVER</em> shown</li>
+              <li><span class="li-icon">🔬</span> Vaginal health tracker — infection detection &amp; alerts</li>
+              <li><span class="li-icon">⏱️</span> Emergency contraception 72-hour countdown timer</li>
+              <li><span class="li-icon">📦</span> Monthly Period Care Kit delivered to your door</li>
+            </ul>
+            <div style="margin-top:1.2rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+              <a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="mc-btn mc-btn-primary">📲 Download MaaCare</a>
+              <a href="#contact" class="mc-btn mc-btn-outline">Learn More</a>
+            </div>
+          </div>
+          <div>
+            <div class="tab-feature-card"><h4>🔒 Privacy First</h4><p>Stealth mode disguises the app. Separate PIN for period section. Zero data shared with family or third parties.</p></div>
+            <div class="tab-feature-card" style="border-left-color:#D4A0A0;"><h4>🙈 Anonymous Q&amp;A</h4><p>Ask a gynecologist anything without revealing your identity. Clinical answers privately within 24 hours.</p></div>
+            <div class="tab-feature-card" style="border-left-color:#f06292;"><h4>🩺 PCOS Assessment</h4><p>AI-driven PCOS risk screening with auto-referral to certified gynecologists for follow-up care.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: PREGNANT -->
+      <div class="tab-pane" id="pane-pregnant">
+        <div class="tab-content-grid">
+          <div>
+            <span class="mc-badge">🤰 Week 1 to Delivery</span>
+            <h3 class="tab-headline">Week 1 se Delivery tak — Hum Saath Hain</h3>
+            <div class="mc-divider"></div>
+            <ul class="feat-list">
+              <li><span class="li-icon">📅</span> Week-by-week pregnancy tracker with baby's development milestones</li>
+              <li><span class="li-icon">👣</span> Kick Counter — alert if &lt;10 kicks in 2 hours</li>
+              <li><span class="li-icon">⏱️</span> Contraction Timer — 5-1-1 rule alert for labor readiness</li>
+              <li><span class="li-icon">💉</span> BP, sugar &amp; weight tracking with trend graphs</li>
+              <li><span class="li-icon">🔔</span> Antenatal test reminders — NT scan, OGTT, anomaly scan</li>
+              <li><span class="li-icon">📹</span> <strong>100% In-App Video Consultation:</strong> HD OB-GYN call via ZEGOCLOUD API — zero external apps (no Zoom or Google Meet needed)</li>
+              <li><span class="li-icon">🏠</span> Home nurse visit for antenatal monitoring</li>
+            </ul>
+            <div style="margin-top:1.2rem;"><a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="mc-btn mc-btn-primary">📲 Download MaaCare</a></div>
+          </div>
+          <div>
+            <div class="tab-feature-card" style="border-left-color:#f48fb1;"><h4>👣 Smart Kick Counter</h4><p>One-tap fetal movement tracking. Alert if less than 10 kicks in 2 hours — nurse notified instantly.</p></div>
+            <div class="tab-feature-card" style="border-left-color:#D4A0A0;"><h4>⏱️ Contraction Timer</h4><p>Precision timing with 5-1-1 rule detection. Know exactly when to head to the hospital.</p></div>
+            <div class="tab-feature-card" style="border-left-color:#f06292;"><h4>📹 100% In-App Tele-OB</h4><p>Native video consultations powered by ZEGOCLOUD API. Zero redirects, no extra app download required — talk to your doctor right inside MaaCare.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: POSTPARTUM -->
+      <div class="tab-pane" id="pane-postpartum">
+        <div class="tab-content-grid">
+          <div>
+            <span class="mc-badge">🍼 Postpartum Care</span>
+            <h3 class="tab-headline">Delivery ke Baad Ka Safar Bhi Important Hai</h3>
+            <div class="mc-divider"></div>
+            <ul class="feat-list">
+              <li><span class="li-icon">🩸</span> Lochia (postpartum bleeding) tracker with danger-sign alerts</li>
+              <li><span class="li-icon">🤱</span> Breastfeeding timer — L/R breast, duration &amp; milk log</li>
+              <li><span class="li-icon">📓</span> Baby daily log — feeds, diapers, sleep, weight &amp; temperature</li>
+              <li><span class="li-icon">🧠</span> Edinburgh PPD Screening (EPDS) at 2 weeks &amp; 6 weeks</li>
+              <li><span class="li-icon">📸</span> C-section wound photo upload for remote assessment</li>
+              <li><span class="li-icon">🏠</span> Nurse home visits — postnatal monitoring at your doorstep</li>
+              <li><span class="li-icon">📹</span> Lactation consultant video call — breastfeeding expert on demand</li>
+            </ul>
+            <div style="margin-top:1.2rem;"><a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="mc-btn mc-btn-primary">📲 Download MaaCare</a></div>
+          </div>
+          <div>
+            <div class="tab-feature-card" style="border-left-color:#f48fb1;"><h4>🧠 PPD Screening</h4><p>Edinburgh Postnatal Depression Scale at 2 &amp; 6 weeks postpartum with immediate counselor referral.</p></div>
+            <div class="tab-feature-card" style="border-left-color:#D4A0A0;"><h4>📸 Remote Wound Care</h4><p>Upload C-section wound photos — nurse reviews within 2 hours and recommends action if needed.</p></div>
+            <div class="tab-feature-card" style="border-left-color:#f06292;"><h4>🤱 Smart Feeding Log</h4><p>Track L/R breast, duration, daily milk output to ensure optimal nutrition for baby.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: CHILD -->
+      <div class="tab-pane" id="pane-child">
+        <div class="tab-content-grid">
+          <div>
+            <span class="mc-badge">👶 Ages 0–5 Years</span>
+            <h3 class="tab-headline">Aapke Bacche Ki Growth — Har Step Par</h3>
+            <div class="mc-divider"></div>
+            <ul class="feat-list">
+              <li><span class="li-icon">📊</span> WHO Growth Charts — weight, height &amp; head circumference percentiles</li>
+              <li><span class="li-icon">💉</span> National Immunization Scheduler — birth to 5 years with auto-reminders</li>
+              <li><span class="li-icon">🔔</span> Missed vaccine catch-up generator — never miss a dose</li>
+              <li><span class="li-icon">🧩</span> Developmental milestone tracker (0-5 yrs) — delay alerts</li>
+              <li><span class="li-icon">🧠</span> Autism Screening M-CHAT-R at 18 months</li>
+              <li><span class="li-icon">📄</span> Digital Vaccination Certificate PDF — always on your phone</li>
+              <li><span class="li-icon">📹</span> <strong>In-App Pediatrician Video Call:</strong> Connect with child specialist inside MaaCare via ZEGOCLOUD in minutes</li>
+            </ul>
+            <div style="margin-top:1.2rem;"><a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="mc-btn mc-btn-primary">📲 Download MaaCare</a></div>
+          </div>
+          <div>
+            <div class="mc-card" style="margin-bottom:1rem;">
+              <h4 style="font-weight:700;margin-bottom:0.8rem;color:#00BCD4;">💉 Sample Immunization Schedule</h4>
+              <table class="vax-table">
+                <thead><tr><th>Age</th><th>Vaccines</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Birth</strong></td><td>BCG · OPV-0 · HepB</td></tr>
+                  <tr><td><strong>6 Weeks</strong></td><td>DTwP · IPV · PCV · RV</td></tr>
+                  <tr><td><strong>9 Months</strong></td><td>OPV-2 · MMR · Vit-A</td></tr>
+                  <tr><td><strong>12 Months</strong></td><td>HepA · Varicella</td></tr>
+                  <tr><td><strong>15–18 mo</strong></td><td>MMR-2 · DTwP-B1 · IPV-B</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-feature-card teal"><h4>🧠 M-CHAT-R Autism Screening</h4><p>WHO-recommended autism checklist at 18 months with instant specialist referral if any concern arises.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: DOCTORS -->
+      <div class="tab-pane" id="pane-doctor">
+        <div class="tab-content-grid">
+          <div>
+            <span class="mc-badge blue">🩺 For Doctors &amp; Specialists</span>
+            <h3 class="tab-headline">Apna Digital Clinic — Zero Infrastructure Cost</h3>
+            <div class="mc-divider" style="background:linear-gradient(90deg,#3D5AFE,#536dfe);"></div>
+            <ul class="feat-list">
+              <li><span class="li-icon">📅</span> Smart OPD slot management — online + in-clinic bookings</li>
+              <li><span class="li-icon">📹</span> <strong>100% In-App Video OPD:</strong> Native ZEGOCLOUD API integration — patients join directly inside MaaCare, no Zoom/Meet links or redirects needed</li>
+              <li><span class="li-icon">💊</span> Digital Rx builder with FDA Pregnancy Category alerts (A/B/C/D/X)</li>
+              <li><span class="li-icon">📁</span> Patient EHR on one screen — history, reports, scans</li>
+              <li><span class="li-icon">📊</span> Real-time earnings dashboard + patient analytics</li>
+              <li><span class="li-icon">📄</span> Referral letter PDF generator — one click, fully formatted</li>
+            </ul>
+            <div style="margin-top:1.2rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+              <a href="mailto:contact@maapark.in" class="mc-btn mc-btn-blue">📩 Register as Doctor →</a>
+              <a href="https://wa.me/918876882959" target="_blank" class="mc-btn mc-btn-outline" style="color:#3D5AFE;border-color:#3D5AFE;">Learn More</a>
+            </div>
+          </div>
+          <div>
+            <div class="tab-feature-card blue"><h4>💊 Pregnancy-Safe Rx Builder</h4><p>FDA pregnancy category (A/B/C/D/X) warnings on every medication — never accidentally prescribe Category X again.</p></div>
+            <div class="tab-feature-card blue"><h4>📊 Earnings Dashboard</h4><p>Real-time revenue analytics, patient load trends, and session history at a glance.</p></div>
+            <div class="tab-feature-card blue"><h4>📁 Unified Patient EHR</h4><p>History, lab reports, scans and prescriptions in one screen — no more switching apps.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: NURSES -->
+      <div class="tab-pane" id="pane-nurse">
+        <div class="tab-content-grid">
+          <div>
+            <span class="mc-badge teal">👩‍⚕️ For Nurses &amp; Midwives</span>
+            <h3 class="tab-headline">Ghar-Ghar Seva Karo — App Se Sab Manage Hoga</h3>
+            <div class="mc-divider" style="background:linear-gradient(90deg,#00BCD4,#26c6da);"></div>
+            <ul class="feat-list">
+              <li><span class="li-icon">📍</span> GPS-optimized daily home visit assignments — efficient routing</li>
+              <li><span class="li-icon">✅</span> OTP verified check-in/check-out — tamper-proof attendance</li>
+              <li><span class="li-icon">📋</span> Real-time vitals entry — BP, sugar, SpO₂, temperature, FHR</li>
+              <li><span class="li-icon">🩹</span> Clinical service checklist — wound dressing, lactation support, injections</li>
+              <li><span class="li-icon">🚨</span> One-tap emergency doctor escalation via HD Video</li>
+              <li><span class="li-icon">💰</span> Per-visit earnings + performance dashboard</li>
+              <li><span class="li-icon">📚</span> In-app CPR &amp; neonatal care training modules</li>
+            </ul>
+            <div style="margin-top:1.2rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+              <a href="mailto:contact@maapark.in" class="mc-btn mc-btn-teal">Apply as Nurse →</a>
+              <a href="https://wa.me/918876882959" target="_blank" class="mc-btn mc-btn-outline" style="color:#00BCD4;border-color:#00BCD4;">Know More</a>
+            </div>
+          </div>
+          <div>
+            <div class="tab-feature-card teal"><h4>📍 GPS-Optimized Visits</h4><p>Smart route planning — minimize travel time, maximize patient care every single day.</p></div>
+            <div class="tab-feature-card teal"><h4>✅ OTP Check-In System</h4><p>Tamper-proof attendance — patients verify arrival with a one-time PIN, protecting both parties.</p></div>
+            <div class="tab-feature-card teal"><h4>📚 CPR Training Modules</h4><p>In-app CPR and neonatal resuscitation training with video demonstrations and assessments.</p></div>
+
+          <!-- ★ NURSE VIDEO CONSULTATION PRICING WIDGET ★ -->
+          <div class="nurse-price-widget" id="nurse-price-widget">
+            <h3>📹 Video Consultation — Dynamic Pricing</h3>
+            <p class="npw-sub">Price = nurse ki rating ke hisab se (Max ₹99). <strong>100% In-App Video Call — Extra koi app nahi chahiye (ZEGOCLOUD).</strong></p>
+
+            <!-- Stars -->
+            <div class="npw-stars" id="npw-stars">
+              <span class="npw-star active" data-r="1">⭐</span>
+              <span class="npw-star active" data-r="2">⭐</span>
+              <span class="npw-star active" data-r="3">⭐</span>
+              <span class="npw-star"        data-r="4">⭐</span>
+              <span class="npw-star"        data-r="5">⭐</span>
+            </div>
+
+            <!-- Price display -->
+            <div class="npw-price-display">
+              <div class="npw-price-amount" id="npw-amount">₹69</div>
+              <div class="npw-price-label" id="npw-label">3★ Experienced Nurse • 1 Session (30 min)</div>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="npw-progress-bar">
+              <div class="npw-progress-fill" id="npw-fill" style="width:50%"></div>
+            </div>
+
+            <!-- Tier table -->
+            <div class="npw-tiers" id="npw-tiers">
+              <div class="npw-tier" data-t="1"><div class="t-stars">1★</div><div class="t-price">₹49</div><div style="font-size:0.6rem;opacity:0.75;">Fresher</div></div>
+              <div class="npw-tier" data-t="2"><div class="t-stars">2★</div><div class="t-price">₹59</div><div style="font-size:0.6rem;opacity:0.75;">Junior</div></div>
+              <div class="npw-tier current" data-t="3"><div class="t-stars">3★</div><div class="t-price">₹69</div><div style="font-size:0.6rem;opacity:0.75;">Exp.</div></div>
+              <div class="npw-tier" data-t="4"><div class="t-stars">4★</div><div class="t-price">₹89</div><div style="font-size:0.6rem;opacity:0.75;">Senior</div></div>
+              <div class="npw-tier" data-t="5"><div class="t-stars">5★</div><div class="t-price">₹99</div><div style="font-size:0.6rem;opacity:0.75;">Top Rated</div></div>
+            </div>
+
+            <!-- Badges -->
+            <div class="npw-badge-row">
+              <span class="npw-badge">🔒 No Hidden Charges</span>
+              <span class="npw-badge">⏱️ 30 Min Session</span>
+              <span class="npw-badge">📹 100% In-App Video</span><span class="npw-badge" style="background:#ccfbf1;color:#0f766e;border-color:#99f6e4;">📲 No Extra App Needed</span>
+              <span class="npw-badge">🚫 Max ₹99</span>
+            </div>
+
+            <a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="npw-cta">📲 Book Nurse Video Call</a>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+    <!-- Team Section -->
+    <section class="section team" id="team">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Meet the Team</h2>
+                <div class="divider"></div>
+                <p>The passionate people behind MaaCare, dedicated to transforming maternal healthcare through
+                    innovation and compassion.</p>
+            </div>
+
+            <!-- Executive Advisory Board: Dr. J.P. Sarma -->
+            <div style="margin-bottom: 2rem;">
+                <div style="
+                    background: #ffffff;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 20px;
+                    padding: clamp(1.4rem, 4vw, 2.5rem);
+                    box-shadow: 0 4px 20px rgba(15,23,42,0.06);
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 2rem;
+                    align-items: flex-start;
+                    position: relative;
+                ">
+                    <!-- Avatar Column -->
+                    <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1rem;min-width:120px;">
+                        <div style="
+                            width:120px;height:120px;border-radius:50%;
+                            overflow:hidden;
+                            box-shadow:0 4px 14px rgba(13,148,136,0.25);
+                            flex-shrink:0;
+                            border:3px solid #0d9488;
+                        "><img src="team-photos/Dr. Jayanta Prasad Sarma.jpeg" alt="Dr. Jayanta Prasad Sarma" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+                        <!-- Trust Badges -->
+                        <div style="display:flex;flex-direction:column;gap:0.4rem;align-items:center;">
+                            <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.68rem;font-weight:700;letter-spacing:0.04em;padding:0.25rem 0.7rem;border-radius:999px;white-space:nowrap;">✦ NABH Certified</span>
+                            <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.68rem;font-weight:700;letter-spacing:0.04em;padding:0.25rem 0.7rem;border-radius:999px;white-space:nowrap;">✦ World Bank Awardee</span>
+                            <span style="background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;font-size:0.68rem;font-weight:700;letter-spacing:0.04em;padding:0.25rem 0.7rem;border-radius:999px;white-space:nowrap;">✦ 31+ Yrs Experience</span>
+                        </div>
+                    </div>
+
+                    <!-- Content Column -->
+                    <div style="flex:1;min-width:min(220px, 100%);">
+                        <!-- Header -->
+                        <div style="margin-bottom:0.5rem;">
+                            <span style="background:#f0fdfa;border:1px solid #ccfbf1;color:#0d9488;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.25rem 0.8rem;border-radius:999px;">Co-Founder &amp; Advisor of MaaCare App</span>
+                        </div>
+                        <h3 style="color:#0f172a;font-size:1.65rem;font-weight:800;margin:0.4rem 0 0.15rem;letter-spacing:-0.01em;">Dr. Jayanta Prasad Sarma</h3>
+                        <p style="color:#0d9488;font-size:0.95rem;font-weight:700;margin:0 0 1.1rem;letter-spacing:0.01em;">MBBS &nbsp;·&nbsp; MS &nbsp;·&nbsp; DIS &nbsp;·&nbsp; PGDIS &nbsp;·&nbsp; MBA (Healthcare Mgmt.)</p>
+
+                        <!-- Skill Tags -->
+                        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.2rem;">
+                            <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Hospital Administration</span>
+                            <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Clinical Governance</span>
+                            <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Occupational Health & Safety</span>
+                            <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Strategic Scaling & Turnaround</span>
+                        </div>
+
+                        <!-- Bio -->
+                        <p style="color:#334155;font-size:0.95rem;line-height:1.75;margin:0 0 1.4rem;">
+                            Dr. J.P. Sarma is a seasoned healthcare executive with over 31 years of leadership across corporate giants and premier hospital groups, having served as Medical Director at Marwari Hospitals (Guwahati), Desun Hospital & Heart Institute (Kolkata, 600+ beds), and GNRC Hospitals — the largest superspeciality hospital group in Northeast India. He spearheaded the commissioning of multiple greenfield hospitals, secured full-fledged NABH accreditations, and drove operational break-evens within record timelines, earning the prestigious <strong style="color:#0f766e;">World Bank Development Marketplace Award of ₹1 Crore (2014)</strong> for institutional innovation. His expertise spans clinical quality governance, OHSAS 18001 safety systems, hospital turnaround strategy, and healthcare policy formulation — having held senior leadership roles at Tata Coffee Limited, Hindustan Lever Limited (Unilever), and Guwahati Medical College. Dr. Sarma brings unmatched institutional depth and regulatory acumen to the MaaCare advisory framework, ensuring clinical protocols and healthcare delivery <strong style="color:#0f766e;font-weight:800;letter-spacing:0.01em;">standards aligned with national accreditation benchmarks</strong>.
+                        </p>
+
+                        <!-- Mini Stats Row -->
+                        <div style="display:flex;flex-wrap:wrap;gap:1rem;padding-top:1.1rem;border-top:1px solid #e2e8f0;">
+                            <div style="text-align:center;flex:1;min-width:70px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:0.6rem 0.4rem;">
+                                <div style="color:#0d9488;font-size:1.35rem;font-weight:800;">31+</div>
+                                <div style="color:#64748b;font-size:0.7rem;margin-top:2px;font-weight:600;">Years Leadership</div>
+                            </div>
+                            <div style="text-align:center;flex:1;min-width:70px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:0.6rem 0.4rem;">
+                                <div style="color:#0d9488;font-size:1.35rem;font-weight:800;">600+</div>
+                                <div style="color:#64748b;font-size:0.7rem;margin-top:2px;font-weight:600;">Beds Managed</div>
+                            </div>
+                            <div style="text-align:center;flex:1;min-width:70px;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:10px;padding:0.6rem 0.4rem;">
+                                <div style="color:#0f766e;font-size:1.3rem;font-weight:800;">NABH</div>
+                                <div style="color:#64748b;font-size:0.7rem;margin-top:2px;font-weight:600;">Accreditations Led</div>
+                            </div>
+                            <div style="text-align:center;flex:1;min-width:70px;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:10px;padding:0.6rem 0.4rem;">
+                                <div style="color:#0f766e;font-size:1.3rem;font-weight:800;">₹1Cr</div>
+                                <div style="color:#64748b;font-size:0.7rem;margin-top:2px;font-weight:600;">World Bank Award</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-grid" style="margin-bottom: 4rem;">
+                <!-- Prof. Bhuyan Premium VIP Card — Full Width -->
+                <div style="
+                    grid-column: 1 / -1;
+                    background: #ffffff;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 24px;
+                    padding: clamp(1.4rem, 4vw, 2.5rem);
+                    box-shadow: 0 4px 20px rgba(15,23,42,0.06);
+                    position: relative;
+                    margin-bottom: 2rem;
+                ">
+                    <!-- Founder Badge Top -->
+                    <div style="text-align:center;margin-bottom:1.8rem;">
+                        <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.75rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:0.35rem 1.2rem;border-radius:999px;">
+                            ✦ &nbsp; Founder &amp; Mentor — MaaCare &nbsp; ✦
+                        </span>
+                    </div>
+
+                    <!-- Main Row: Avatar + Header + Expertise -->
+                    <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin-bottom:2rem;">
+
+                        <!-- Avatar -->
+                        <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
+                            <div style="width:130px;height:130px;border-radius:50%;overflow:hidden;border:3px solid #0d9488;box-shadow:0 4px 14px rgba(13,148,136,0.25);">
+                                <img src="team-photos/dr.h.b.jpeg" alt="Prof. Hemeswari Bhuyan" style="width:100%;height:100%;object-fit:cover;">
+                            </div>
+                            <div style="text-align:center;">
+                                <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;margin-bottom:0.35rem;white-space:nowrap;">✦ PhD Guide & Supervisor</span>
+                                <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;margin-bottom:0.35rem;white-space:nowrap;">✦ Capt. MNS (TA) Veteran</span>
+                                <span style="background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;white-space:nowrap;">✦ 38+ Years Experience</span>
+                            </div>
+                        </div>
+
+                        <!-- Name & Details -->
+                        <div style="flex:1;min-width:min(220px, 100%);">
+                            <h3 style="color:#0f172a;font-size:1.75rem;font-weight:800;margin:0 0 0.2rem;letter-spacing:-0.02em;line-height:1.2;">Prof. (Dr.) Hemeswari Bhuyan</h3>
+
+                            <!-- Current Role — Highlighted -->
+                            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.4rem;">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#0d9488;flex-shrink:0;"></span>
+                                <p style="color:#0d9488;font-size:1.05rem;font-weight:700;margin:0;">Principal, Dispur Nursing Institute</p>
+                            </div>
+                            <!-- Historic Roles -->
+                            <p style="color:#0369a1;font-size:0.88rem;font-weight:600;margin:0 0 0.3rem;padding-left:1.2rem;">Former Principal, Regional College of Nursing (RCN), Guwahati</p>
+                            <p style="color:#475569;font-size:0.85rem;font-weight:500;margin:0 0 1.2rem;padding-left:1.2rem;">Former Vice Principal &amp; HOD, Royal School of Nursing — The Assam Royal Global University</p>
+
+                            <!-- Expertise Tags -->
+                            <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Healthcare Leadership & Governance</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Advanced Nursing Education</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Community Health Innovation</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Clinical Research & Tech Mentorship</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div style="height:1px;background:#e2e8f0;margin-bottom:1.8rem;"></div>
+
+                    <!-- Bio -->
+                    <p style="color:#334155;font-size:0.95rem;line-height:1.8;margin:0 0 2rem;max-width:900px;">
+                        Prof. (Dr.) Hemeswari Bhuyan is a distinguished healthcare visionary, elite academic leader, and pioneer in nursing education with over <strong style="color:#0f766e;">38+ years of monumental experience</strong>. She currently serves as the <strong style="color:#0d9488;">Principal of Dispur Nursing Institute</strong>, continuing her lifelong dedication to shaping the future of healthcare delivery, academic excellence, and institutional governance in the region. As a premier healthcare innovator, Dr. Bhuyan serves as the <strong style="color:#0f766e;">Founder and Chief Mentor of MaaCare</strong>, ensuring the platform operates on world-class clinical guidelines and cutting-edge digital health protocols. Her illustrious career is anchored by her historic tenure as the <strong style="color:#0f172a;">Former Principal of the Regional College of Nursing (RCN), Guwahati</strong>, and her pivotal role as the Vice Principal/HOD at the Royal School of Nursing, The Assam Royal Global University. A veteran leader of exceptional discipline, she has also served as a <strong style="color:#0f172a;">Captain in the Military Nursing Service (TA), Guwahati</strong>.
+                    </p>
+
+                    <!-- VIP Credentials Grid -->
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;">
+
+                        <!-- Credential 1 -->
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:1rem 1.1rem;">
+                            <div style="font-size:1.3rem;margin-bottom:0.4rem;">🏛️</div>
+                            <div style="color:#0f172a;font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;">Current Leadership</div>
+                            <div style="color:#475569;font-size:0.78rem;line-height:1.5;">Principal, Dispur Nursing Institute</div>
+                        </div>
+
+                        <!-- Credential 2 -->
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:1rem 1.1rem;">
+                            <div style="font-size:1.3rem;margin-bottom:0.4rem;">🎓</div>
+                            <div style="color:#0f172a;font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;">Historic Governance</div>
+                            <div style="color:#475569;font-size:0.78rem;line-height:1.5;">Former Principal, RCN Guwahati &amp; VP/HOD, Royal School of Nursing, RGU</div>
+                        </div>
+
+                        <!-- Credential 3 -->
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:1rem 1.1rem;">
+                            <div style="font-size:1.3rem;margin-bottom:0.4rem;">🔬</div>
+                            <div style="color:#0f172a;font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;">Research Mastery</div>
+                            <div style="color:#475569;font-size:0.78rem;line-height:1.5;">Recognized PhD Guide &amp; Supervisor — mentoring the next generation of doctoral scholars</div>
+                        </div>
+
+                        <!-- Credential 4 -->
+                        <div style="background:#f0fdfa;border:1px solid #ccfbf1;border-radius:14px;padding:1rem 1.1rem;">
+                            <div style="font-size:1.3rem;margin-bottom:0.4rem;">⚔️</div>
+                            <div style="color:#0f766e;font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;">Military Service</div>
+                            <div style="color:#475569;font-size:0.78rem;line-height:1.5;">Veteran Captain, Military Nursing Service (TA), Guwahati</div>
+                        </div>
+                    </div>
+
+                    <!-- VIP Impact Metrics -->
+                    <div style="display:flex;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid #e2e8f0;">
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0d9488;font-size:1.6rem;font-weight:900;line-height:1;">38+</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">YEARS EXP.</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0d9488;font-size:1.6rem;font-weight:900;line-height:1;">27+</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">PUBLICATIONS</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0f766e;font-size:1.6rem;font-weight:900;line-height:1;">3</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">PATENTS</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0f766e;font-size:1.6rem;font-weight:900;line-height:1;">1</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">BOOK</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manirul Hussain Premium VIP Card — Full Width -->
+                <div style="
+                    grid-column: 1 / -1;
+                    background: #ffffff;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 24px;
+                    padding: clamp(1.4rem, 4vw, 2.5rem);
+                    box-shadow: 0 4px 20px rgba(15,23,42,0.06);
+                    position: relative;
+                    margin-bottom: 2rem;
+                ">
+                    <!-- Top Badge -->
+                    <div style="text-align:center;margin-bottom:1.8rem;">
+                        <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.75rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:0.35rem 1.2rem;border-radius:999px;">
+                            ✦ &nbsp; Co-Founder, CEO &amp; Lead Architect — Maa Park &nbsp; ✦
+                        </span>
+                    </div>
+
+                    <!-- Main Row -->
+                    <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin-bottom:2rem;">
+
+                        <!-- Avatar -->
+                        <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
+                            <div style="width:130px;height:130px;border-radius:50%;overflow:hidden;border:3px solid #0d9488;box-shadow:0 4px 14px rgba(13,148,136,0.25);">
+                                <img src="team-photos/manirul hussain.jpeg" alt="Manirul Hussain" style="width:100%;height:100%;object-fit:cover;">
+                            </div>
+                            <!-- Trust Badges -->
+                            <div style="text-align:center;">
+                                <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;margin-bottom:0.35rem;white-space:nowrap;">✦ TNAI &amp; Koita Awardee</span>
+                                <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;margin-bottom:0.35rem;white-space:nowrap;">✦ Play Store Live</span>
+                                <span style="background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;white-space:nowrap;">✦ CEO &amp; Full-Stack</span>
+                            </div>
+                        </div>
+
+                        <!-- Name & Details -->
+                        <div style="flex:1;min-width:min(220px, 100%);">
+                            <h3 style="color:#0f172a;font-size:1.75rem;font-weight:800;margin:0 0 0.2rem;letter-spacing:-0.02em;line-height:1.2;">Manirul Hussain</h3>
+
+                            <!-- Tagline -->
+                            <p style="color:#0d9488;font-size:0.95rem;font-weight:700;margin:0 0 0.5rem;letter-spacing:0.01em;">Clinical Innovator &nbsp;·&nbsp; Full-Stack AI Engineer &nbsp;·&nbsp; TNAI &amp; Koita Foundation Laureate</p>
+
+                            <!-- Current Role -->
+                            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#0d9488;flex-shrink:0;"></span>
+                                <p style="color:#0d9488;font-size:1rem;font-weight:700;margin:0;">Co-Founder &amp; CEO, Maa Park</p>
+                            </div>
+                            <p style="color:#475569;font-size:0.88rem;font-weight:500;margin:0 0 1.2rem;padding-left:1.2rem;">B.Sc. Nursing — The Assam Royal Global University, Guwahati</p>
+
+                            <!-- Skill Tags -->
+                            <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Advanced Full-Stack Engineering</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">AI &amp; ML Clinical Integration</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Flutter &amp; Dart Architecture</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Digital Health Transformation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div style="height:1px;background:#e2e8f0;margin-bottom:1.8rem;"></div>
+
+                    <!-- Bio -->
+                    <div style="color:#334155;font-size:0.95rem;line-height:1.8;margin:0 0 2rem;max-width:900px;">
+                        <p style="margin-bottom:1rem;">
+                            Manirul Hussain is a pioneering force at the intersection of clinical healthcare and advanced software engineering. As the <strong style="color:#0d9488;">Co-Founder and CEO of Maa Park</strong>, he is the visionary architect behind <strong style="color:#0f172a;">MaaCare</strong>—India’s premier AI-driven maternal healthcare ecosystem, currently live and scaling on the Google Play Store.
+                        </p>
+                        <p style="margin-bottom:1rem;">
+                            Currently pursuing his <strong style="color:#0f172a;">B.Sc. in Nursing at The Assam Royal Global University</strong>, Manirul possesses a rare and powerful dual-expertise. He seamlessly bridges grassroots clinical insights with high-level technological execution to build robust, patient-centric digital health solutions. His exceptional acumen in healthcare technology was recently recognized nationally with the prestigious <strong style="color:#0f766e;">Digital Health Foundation Fast Track Learner Award</strong>, conferred by the <em>Trained Nurses' Association of India (TNAI)</em> in collaboration with the <em>Koita Foundation</em>.
+                        </p>
+                        <p style="margin:0;">
+                            Operating under the esteemed mentorship of Prof. (Dr.) Hemeswari Bhuyan, Manirul has independently designed, engineered, and deployed MaaCare’s entire enterprise-grade technology stack. His technical mastery encompasses complex Flutter-based frontend architecture and secure backend systems, integrating cutting-edge technologies such as <strong style="color:#0f172a;">Google Gemini 2.5 Flash</strong> for AI-driven patient support, <strong style="color:#0f172a;">ZEGOCLOUD API</strong> for 100% native in-app telemedicine video consultations (eliminating all third-party app dependencies), <strong style="color:#0f172a;">Razorpay</strong> for secure financial transactions, and real-time WebSocket infrastructure.
+                        </p>
+                    </div>
+
+                    <!-- Mini Stats Row — Manirul -->
+                    <div style="display:flex;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid #e2e8f0;">
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0d9488;font-size:1.3rem;font-weight:900;">📱</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">PLAY STORE LIVE</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0d9488;font-size:1.3rem;font-weight:900;">21+</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">FEATURES BUILT</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0f766e;font-size:1rem;font-weight:900;line-height:1.2;">TNAI<br><span style="font-size:0.7rem;">Award</span></div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">DIGITAL HEALTH</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0f766e;font-size:1.3rem;font-weight:900;">AI</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">GEMINI 2.5 FLASH</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Julfikar Ali Premium VIP Card — Full Width -->
+                <div style="
+                    grid-column: 1 / -1;
+                    background: #ffffff;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 24px;
+                    padding: clamp(1.4rem, 4vw, 2.5rem);
+                    box-shadow: 0 4px 20px rgba(15,23,42,0.06);
+                    position: relative;
+                    margin-bottom: 2rem;
+                ">
+                    <!-- Top Badge -->
+                    <div style="text-align:center;margin-bottom:1.8rem;">
+                        <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.75rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:0.35rem 1.2rem;border-radius:999px;">
+                            ✦ &nbsp; Chief Innovation Officer &amp; Lead Researcher — Maa Park &nbsp; ✦
+                        </span>
+                    </div>
+
+                    <!-- Main Row -->
+                    <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:flex-start;margin-bottom:2rem;">
+                        <!-- Avatar -->
+                        <div style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:0.8rem;">
+                            <div style="width:130px;height:130px;border-radius:50%;overflow:hidden;border:3px solid #0d9488;box-shadow:0 4px 14px rgba(13,148,136,0.25);">
+                                <img src="team-photos/julfikar.jpeg" alt="Julfikar Ali" style="width:100%;height:100%;object-fit:cover;">
+                            </div>
+                            <div style="text-align:center;">
+                                <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;margin-bottom:0.35rem;white-space:nowrap;">✦ TNAI &amp; Koita Awardee</span>
+                                <span style="background:#f0fdfa;border:1px solid #99f6e4;color:#0f766e;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;margin-bottom:0.35rem;white-space:nowrap;">✦ CIO &amp; Lead Researcher</span>
+                                <span style="background:#f0f9ff;border:1px solid #bae6fd;color:#0369a1;font-size:0.65rem;font-weight:700;letter-spacing:0.04em;padding:0.22rem 0.7rem;border-radius:999px;display:block;white-space:nowrap;">✦ Digital Health Expert</span>
+                            </div>
+                        </div>
+
+                        <!-- Name & Details -->
+                        <div style="flex:1;min-width:min(220px,100%);">
+                            <h3 style="color:#0f172a;font-size:1.75rem;font-weight:800;margin:0 0 0.2rem;letter-spacing:-0.02em;line-height:1.2;">Julfikar Ali</h3>
+                            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;">
+                                <span style="width:8px;height:8px;border-radius:50%;background:#0d9488;flex-shrink:0;"></span>
+                                <p style="color:#0d9488;font-size:1rem;font-weight:700;margin:0;">Chief Innovation Officer (CIO) &amp; Lead Researcher, Maa Park</p>
+                            </div>
+                            <p style="color:#475569;font-size:0.88rem;font-weight:500;margin:0 0 1.2rem;padding-left:1.2rem;">BSc Nursing — The Assam Royal Global University, Guwahati</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:0.45rem;">
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Clinical Nursing</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Digital Health Innovation</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Healthcare Research</span>
+                                <span style="background:#f8fafc;border:1px solid #e2e8f0;color:#0f766e;font-size:0.75rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:8px;">Community Health</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div style="height:1px;background:#e2e8f0;margin-bottom:1.8rem;"></div>
+
+                    <!-- Bio -->
+                    <p style="color:#334155;font-size:0.95rem;line-height:1.8;margin:0 0 2rem;max-width:900px;">
+                        Julfikar Ali serves as the <strong style="color:#0d9488;">Chief Innovation Officer (CIO) &amp; Lead Researcher</strong> of the platform. He is currently pursuing his BSc in Nursing at <strong style="color:#0f172a;">The Assam Royal Global University (RGU), Guwahati</strong>, while simultaneously driving advanced healthcare initiatives under the distinguished guidance of Prof. (Dr.) Hemeswari Bhuyan. Recognized for his exceptional expertise in digital healthcare, Julfikar was honoured with the prestigious <strong style="color:#0f766e;">Fast Track Learner Award</strong> by the <em>Trained Nurses' Association of India (TNAI) &amp; Koita Foundation</em>. Combining his clinical background with technological innovation, he spearheads the platform's core research frameworks and digital health strategies to revolutionize community well-being.
+                    </p>
+
+                    <!-- Mini Stats Row -->
+                    <div style="display:flex;flex-wrap:wrap;gap:1rem;padding-top:1.5rem;border-top:1px solid #e2e8f0;">
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0f766e;font-size:1rem;font-weight:900;line-height:1.2;">TNAI<br><span style="font-size:0.7rem;">Award</span></div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">FAST TRACK LEARNER</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0d9488;font-size:1.3rem;font-weight:900;">CIO</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">CHIEF INNOVATION</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0d9488;font-size:1.3rem;font-weight:900;">🔬</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">LEAD RESEARCHER</div>
+                        </div>
+                        <div style="flex:1;min-width:100px;text-align:center;background:#f0fdfa;border:1px solid #ccfbf1;border-radius:12px;padding:1rem 0.5rem;">
+                            <div style="color:#0f766e;font-size:1.3rem;font-weight:900;">🏥</div>
+                            <div style="color:#64748b;font-size:0.7rem;margin-top:4px;font-weight:700;letter-spacing:0.05em;">COMMUNITY HEALTH</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commitment Stats — Clean High Contrast -->
+            <style>
+                .stats-grid-premium {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 1.5rem;
+                    margin-top: 2rem;
+                }
+                .stat-box-premium {
+                    background: #ffffff;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 20px;
+                    padding: 2rem 1.5rem;
+                    text-align: center;
+                    position: relative;
+                    box-shadow: 0 4px 16px rgba(15,23,42,0.04);
+                    transition: transform 0.25s ease, box-shadow 0.25s ease;
+                }
+                .stat-box-premium:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px rgba(15,23,42,0.08);
+                    border-color: #cbd5e1;
+                }
+                .stat-num-animated {
+                    font-size: 2.8rem;
+                    font-weight: 900;
+                    color: #0d9488;
+                    line-height: 1;
+                    letter-spacing: -0.02em;
+                    font-family: 'Poppins', sans-serif;
+                }
+                .stat-num-animated.green { color: #0f766e; }
+                .stat-suffix {
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    vertical-align: super;
+                }
+                .stat-label-premium {
+                    color: #0f172a;
+                    font-size: 0.85rem;
+                    font-weight: 700;
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                    margin: 0.6rem 0 0.4rem;
+                }
+                .stat-desc-premium {
+                    color: #64748b;
+                    font-size: 0.78rem;
+                    line-height: 1.6;
+                    margin: 0;
+                }
+            </style>
+
+            <div class="commitment-section" style="text-align: center;" id="stats-section">
+                <h2>Our Team's Commitment</h2>
+                <div class="divider" style="margin: 1rem auto 2rem;"></div>
+                <div class="stats-grid-premium">
+
+                    <!-- Card 1: 70+ Years -->
+                    <div class="stat-box-premium">
+                        <div class="stat-num-animated">
+                            <span class="counter" data-target="70" data-suffix="+">0</span><span class="stat-suffix">+</span>
+                        </div>
+                        <p class="stat-label-premium">Combined Medical Leadership</p>
+                        <p class="stat-desc-premium">Dr. Bhuyan (38+ yrs) & Dr. Sarma (31+ yrs) — unmatched clinical, academic & governance expertise in Indian healthcare.</p>
+                    </div>
+
+                    <!-- Card 2: 27+ Publications -->
+                    <div class="stat-box-premium">
+                        <div class="stat-num-animated">
+                            <span class="counter" data-target="27" data-suffix="+">0</span><span class="stat-suffix">+</span>
+                        </div>
+                        <p class="stat-label-premium">Research Publications</p>
+                        <p class="stat-desc-premium">National and international research publications in community health, maternal care, and nursing education.</p>
+                    </div>
+
+                    <!-- Card 3: 3 Patents -->
+                    <div class="stat-box-premium green-glow">
+                        <div class="stat-num-animated green">
+                            <span class="counter" data-target="3" data-suffix="">0</span>
+                        </div>
+                        <p class="stat-label-premium" style="color:#10b981;">Patents Held</p>
+                        <p class="stat-desc-premium">Innovative healthcare solutions and digital advancements in maternal health & nursing technology.</p>
+                    </div>
+
+                    <!-- Card 4: ₹1Cr World Bank -->
+                    <div class="stat-box-premium green-glow">
+                        <div class="stat-num-animated green" style="font-size:2.2rem;">₹1Cr<span style="font-size:1.1rem;font-weight:700;color:#10b981;">+</span></div>
+                        <p class="stat-label-premium" style="color:#10b981;">World Bank Awardee</p>
+                        <p class="stat-desc-premium">Dr. J.P. Sarma — recipient of the World Bank Development Marketplace Award (2014) for institutional innovation in healthcare.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Animated Counter Script -->
+            <script>
+            (function() {
+                function animateCounter(el) {
+                    var target = parseInt(el.getAttribute('data-target'), 10);
+                    var suffix = el.getAttribute('data-suffix') || '';
+                    var duration = 1800;
+                    var start = null;
+                    function step(ts) {
+                        if (!start) start = ts;
+                        var progress = Math.min((ts - start) / duration, 1);
+                        var ease = 1 - Math.pow(1 - progress, 4);
+                        el.textContent = Math.floor(ease * target) + suffix;
+                        if (progress < 1) requestAnimationFrame(step);
+                        else el.textContent = target + suffix;
+                    }
+                    requestAnimationFrame(step);
+                }
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.querySelectorAll('.counter').forEach(animateCounter);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.4 });
+                document.addEventListener('DOMContentLoaded', function() {
+                    var sec = document.getElementById('stats-section');
+                    if (sec) observer.observe(sec);
+                });
+            })();
+            </script>
+
+            <!-- Call to action -->
+            <div class="cta-section"
+                style="text-align: center; margin-top: 4rem; padding: 3rem; background-color: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border);">
+                <h3 style="font-size: 2rem; color: var(--primary);">Be Part of Our Mission</h3>
+                <p style="margin-bottom: 2rem; font-size: 1.1rem;">We're always looking for passionate individuals who
+                    want to make a difference in maternal healthcare.</p>
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- App Overview -->
+    <section class="section about-app" id="about">
+        <div class="section-container">
+            <div class="section-header" style="text-align: center;">
+                <img src="team-photos/logo .png" alt="MaaCare App Logo"
+                    style="height: 80px; width: auto; object-fit: contain; margin-bottom: 1rem;">
+                <h2>About MaaCare</h2>
+                <div class="divider" style="margin: 1rem auto 2rem;"></div>
+                <p>Designed with care, for care. MaaCare is more than an app — it's India's most complete motherhood ecosystem, powered by AI and built with clinical expertise.</p>
+            </div>
+            <!-- Live App Stats Banner -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2.5rem;padding:1.6rem;background:#ffffff;border-radius:18px;border:1px solid #ccfbf1;box-shadow:0 4px 20px rgba(13,148,136,0.06);">
+                <div style="text-align:center;padding:0.5rem;">
+                    <div style="color:#e11d48;font-size:1.85rem;font-weight:900;">1,23,456</div>
+                    <div style="color:#0f172a;font-size:0.78rem;margin-top:4px;font-weight:700;letter-spacing:0.04em;">MAMAS ONLINE 💕</div>
+                </div>
+                <div style="text-align:center;padding:0.5rem;border-left:1px solid #f1f5f9;">
+                    <div style="color:#0d9488;font-size:1.85rem;font-weight:900;">v3.6.1</div>
+                    <div style="color:#0f172a;font-size:0.78rem;margin-top:4px;font-weight:700;letter-spacing:0.04em;">LATEST VERSION</div>
+                </div>
+                <div style="text-align:center;padding:0.5rem;border-left:1px solid #f1f5f9;">
+                    <div style="color:#0d9488;font-size:1.85rem;font-weight:900;">21+</div>
+                    <div style="color:#0f172a;font-size:0.78rem;margin-top:4px;font-weight:700;letter-spacing:0.04em;">FEATURE MODULES</div>
+                </div>
+                <div style="text-align:center;padding:0.5rem;border-left:1px solid #f1f5f9;">
+                    <div style="color:#0f766e;font-size:1.85rem;font-weight:900;">3</div>
+                    <div style="color:#0f172a;font-size:0.78rem;margin-top:4px;font-weight:700;letter-spacing:0.04em;">USER ROLES</div>
+                </div>
+                <div style="text-align:center;padding:0.5rem;border-left:1px solid #f1f5f9;">
+                    <div style="color:#0284c7;font-size:1.85rem;font-weight:900;">AI</div>
+                    <div style="color:#0f172a;font-size:0.78rem;margin-top:4px;font-weight:700;letter-spacing:0.04em;">GEMINI 2.5 FLASH</div>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="info-card">
+                    <div class="feature-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <h3>Comprehensive Tracking</h3>
+                    <p>Monitor pregnancy week-by-week, period cycles, baby development, vaccinations, and health vitals — all in one beautifully designed app.</p>
+                </div>
+                <div class="info-card" style="border-left: 4px solid #0d9488;">
+                    <div class="feature-icon"><i class="fa-solid fa-video"></i></div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                        <h3 style="margin:0;">100% In-App Video Telemedicine</h3>
+                        <span style="font-size:0.65rem;font-weight:800;background:#ccfbf1;color:#0f766e;padding:2px 6px;border-radius:4px;">ZEGOCLOUD</span>
+                    </div>
+                    <p><strong>Zero Extra Apps Needed:</strong> Consultations happen 100% inside MaaCare — no Zoom, Google Meet, or WhatsApp links. One-tap crystal clear video with verified gynecologists, pediatricians, and nurses.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="section mission" id="mission">
+        <div class="section-container grid-2 align-center">
+            <div class="mission-image">
+                <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    alt="Mother and Child" class="rounded-image">
+            </div>
+            <div class="mission-content">
+                <h2>Our Mission & Vision</h2>
+                <div class="divider"></div>
+                <div class="mission-block">
+                    <h3><i class="fa-solid fa-bullseye"></i> Mission</h3>
+                    <p>To empower every mother with accessible, high-quality healthcare resources and a supportive
+                        community, ensuring no one walks the path of motherhood alone.</p>
+                </div>
+                <div class="mission-block">
+                    <h3><i class="fa-solid fa-eye"></i> Vision</h3>
+                    <p>Maa Park envisions a world where maternal and child healthcare is seamlessly integrated into
+                        daily life, fostering healthier generations through technology and compassion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section features bg-muted" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>App Features</h2>
+                <div class="divider"></div>
+                <p>Everything you need for a safe and informed pregnancy journey.</p>
+            </div>
+            <div class="grid-3">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                    <h4>Pregnancy Tracker</h4>
+                    <p>Track your week-by-week pregnancy progress with baby's size, development, and milestones.
+                        Automatically calculates your week, providing daily tips, growth charts, and ultrasound
+                        reminders.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.1s;">
+                    <div class="feature-icon"><i class="fa-solid fa-spa"></i></div>
+                    <h4>Prenatal Yoga</h4>
+                    <p>Pregnancy-safe yoga routines and videos for physical and mental wellness. Week-wise guided video
+                        sessions (10-30 min) from beginner to advanced, with animated pose instructions.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.2s;">
+                    <div class="feature-icon"><i class="fa-solid fa-baby"></i></div>
+                    <h4>Child Care Guide</h4>
+                    <p>A complete guide from newborn to toddler, covering feeding, sleeping, and milestones. Features
+                        age-based articles, videos, and checklists with offline download options.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.3s;">
+                    <div class="feature-icon"><i class="fa-solid fa-heart"></i></div>
+                    <h4>Self Care</h4>
+                    <p>Daily self-care tips to prevent motherhood burnout. Includes a mood tracker, meditation audios,
+                        journaling prompts, and weekly self-assessment quizzes.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.1s; border-left: 4px solid #00BCD4;">
+                    <div class="feature-icon" style="color:#00BCD4; background:#e0f7fa;"><i class="fa-solid fa-video"></i></div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+                        <h4 style="margin:0;">Consult an Expert</h4>
+                        <span style="font-size:0.65rem;font-weight:800;background:#ccfbf1;color:#0f766e;padding:2px 6px;border-radius:4px;">100% IN-APP</span>
+                    </div>
+                    <p>Book secure, private video consultations powered by <strong>ZEGOCLOUD API</strong>. <strong>Koi extra app nahi chahiye</strong> — video call 100% MaaCare ke andar hi hota hai without any third-party redirects.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.2s;">
+                    <div class="feature-icon"><i class="fa-solid fa-people-roof"></i></div>
+                    <h4>Family Planning</h4>
+                    <p>Tools and WHO-guided information to help you plan your family's future. Learn about fertility
+                        awareness, postpartum contraception options, and infertility support.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.3s;">
+                    <div class="feature-icon"><i class="fa-solid fa-pills"></i></div>
+                    <h4>Contraception Guide</h4>
+                    <p>A comprehensive guide to various modern contraceptive methods. Explore hormonal, barrier, IUD,
+                        and permanent methods with effectiveness, pros, and cons.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.1s;">
+                    <div class="feature-icon"><i class="fa-solid fa-syringe"></i></div>
+                    <h4>Vaccinations Tracker</h4>
+                    <p>A tracker for baby and mom's vaccination schedules. Sets up a calendar based on WHO/Indian
+                        guidelines with reminders and nearby clinic information.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.2s;">
+                    <div class="feature-icon"><i class="fa-solid fa-apple-whole"></i></div>
+                    <h4>Nutrition Guide</h4>
+                    <p>Balanced diet plans and recipes for pregnancy and postpartum periods. Includes calorie
+                        calculator, grocery lists, easy Indian recipes, and allergy filters.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.3s;">
+                    <div class="feature-icon"><i class="fa-solid fa-stethoscope"></i></div>
+                    <h4>Symptom Checker</h4>
+                    <p>A quick diagnosis tool for common pregnancy symptoms. Uses symptom selector to indicate risk
+                        level with 'See Doctor?' alerts and follow-up chatbot.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.1s;">
+                    <div class="feature-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h4>AI Companion</h4>
+                    <p>A 24/7 smart chatbot that answers questions like 'How many baby kicks are normal?' Understands
+                        natural language queries and provides personalized responses.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.2s;">
+                    <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                    <h4>Parents Park</h4>
+                    <p>A safe, moderated forum for moms to share experiences. Post anonymously, filter by pregnancy week, react with likes, and chat live with other mamas.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.3s;">
+                    <div class="feature-icon"><i class="fa-solid fa-circle-dot"></i></div>
+                    <h4>Period Dashboard</h4>
+                    <p>A complete menstrual cycle tracker for girls — predict cycles, track ovulation, log moods, view period history, and access cycle-specific nutrition guides.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.1s;">
+                    <div class="feature-icon"><i class="fa-solid fa-child-reaching"></i></div>
+                    <h4>Child Growth Tracker</h4>
+                    <p>Track your baby's height, weight, and development milestones against WHO growth standards. Interactive charts (fl_chart) with age-wise health benchmarks.</p>
+                </div>
+                <div class="feature-card" style="animation-delay: 0.2s;">
+                    <div class="feature-icon"><i class="fa-solid fa-gamepad"></i></div>
+                    <h4>Gamification & Rewards</h4>
+                    <p>Earn points for daily logins (+15), mood check-ins (+5), tasks (+10), and community posts. Unlock badge tiers from New Mama to Legend Mama 🏆</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+  <!-- ═══════════════ NEW: SOS EMERGENCY ═══════════════ -->
+  <section id="sos" class="reveal">
+    <div class="sos-wrap">
+      <div class="sos-pulse-circle">🚨</div>
+      <span class="mc-badge red">MaaCare SOS</span>
+      <h2 class="mc-h2" style="margin-top:0.4rem;">When Every Second Counts</h2>
+      <div class="mc-divider center" style="background:linear-gradient(90deg,#FF5252,#ff8a80);"></div>
+      <p class="mc-p" style="max-width:540px;margin:0.4rem auto 0;">In a pregnancy emergency, time is everything. One tap is all it takes.</p>
+      <div class="sos-grid">
+        <div class="sos-card"><span class="s-icon">📱</span><h4>Family Alert — Instantly</h4><p>SMS + call to 3 emergency contacts with live GPS location — triggered in seconds, automatically.</p></div>
+        <div class="sos-card"><span class="s-icon">🚑</span><h4>Ambulance Dispatch</h4><p>Nearest ambulance auto-alerted with GPS coordinates. Zero manual calls needed.</p></div>
+        <div class="sos-card"><span class="s-icon">🏥</span><h4>Hospital Locator</h4><p>Nearest maternity hospitals, blood banks, NICU shown instantly with live distance &amp; availability.</p></div>
+        <div class="sos-card"><span class="s-icon">⚠️</span><h4>Danger Sign Detector</h4><p>AI triages symptoms — severe headache, bleeding, no fetal movement — and escalates care instantly.</p></div>
+        <div class="sos-card"><span class="s-icon">📞</span><h4>24/7 Nurse Helpline</h4><p>Emergency nurse calls back within minutes. Available round the clock, every day of the year.</p></div>
+        <div class="sos-card free"><span class="s-icon">🆓</span><h4>Free for ALL Users</h4><p>SOS Emergency is available to every MaaCare user — free or paid. Nobody left behind in an emergency.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ NEW: PRICING PLANS ═══════════════ -->
+  <section id="pricing" class="reveal">
+    <div class="pricing-wrap">
+      <div style="text-align:center;">
+        <span class="mc-badge">💳 Subscription Plans</span>
+        <h2 class="mc-h2">Plans for Every Stage of Your Journey</h2>
+        <div class="mc-divider center"></div>
+        <p class="mc-p">Start free, upgrade anytime. 7-day free trial on all paid plans. Cancel anytime.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-emoji">🆓</div>
+          <div class="price-name">Free Basic</div>
+          <div class="price-amount">₹0<small>/forever</small></div>
+          <ul class="price-features">
+            <li>Period tracker</li><li>Pregnancy tracker</li><li>Immunization scheduler</li><li>AI chatbot</li><li>Community forum</li><li>SOS Emergency</li>
+          </ul>
+          <a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="price-cta outline">Get Started Free</a>
+        </div>
+        <div class="price-card">
+          <div class="price-emoji">🩸</div>
+          <div class="price-name">Teen Wellness</div>
+          <div class="price-amount">Coming Soon</div>
+          <ul class="price-features">
+            <li>All Free features</li><li>PCOS assessment</li><li>Anonymous Q&amp;A (5/mo)</li><li>PMS tracker</li><li>Period care kit</li><li>Mental wellness</li>
+          </ul>
+          <a href="https://wa.me/918876882959" target="_blank" class="price-cta outline">Notify Me</a>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">⭐ Most Popular</div>
+          <div class="price-emoji">🌸</div>
+          <div class="price-name">MaaCare Silver</div>
+          <div class="price-amount">Coming Soon</div>
+          <ul class="price-features">
+            <li>All Free features</li><li>2 video consults/month</li><li>1 nurse visit/month</li><li>Comprehensive EHR tracking</li><li>Digital prescriptions</li><li>PPD screening</li>
+          </ul>
+          <a href="https://wa.me/918876882959" target="_blank" class="price-cta primary">Notify Me</a>
+        </div>
+        <div class="price-card">
+          <div class="price-emoji">✨</div>
+          <div class="price-name">MaaCare Gold</div>
+          <div class="price-amount">Coming Soon</div>
+          <ul class="price-features">
+            <li>Unlimited video consults</li><li>4 nurse visits/month</li><li>Priority doctor access</li><li>E-pharmacy discounts</li><li>Full PPD program</li><li>Analytics dashboard</li>
+          </ul>
+          <a href="https://wa.me/918876882959" target="_blank" class="price-cta outline">Notify Me</a>
+        </div>
+        <div class="price-card">
+          <div class="price-emoji">💎</div>
+          <div class="price-name">Platinum</div>
+          <div class="price-amount">Coming Soon</div>
+          <ul class="price-features">
+            <li>Dedicated OB-GYN</li><li>24/7 nurse on-call</li><li>Weekly home monitoring</li><li>Dedicated care coordinator</li><li>Emergency priority queue</li><li>Family plan (4 members)</li>
+          </ul>
+          <a href="https://wa.me/918876882959" target="_blank" class="price-cta outline">Notify Me</a>
+        </div>
+      </div>
+      <p class="pricing-note">🔒 All plans include end-to-end encryption &amp; DPDP 2023 compliance &nbsp;|&nbsp; 7-day free trial on all paid plans &nbsp;|&nbsp; Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════ NEW: INVESTOR SECTION ═══════════════ -->
+  <section id="investor" class="reveal">
+    <div class="investor-wrap">
+      <div class="investor-grid">
+        <div>
+          <span class="mc-badge navy">💼 For Investors &amp; Partners</span>
+          <h2 class="mc-h2 white" style="margin-top:0.5rem;">Building India's First End-to-End Maternal Health Ecosystem</h2>
+          <div class="mc-divider white"></div>
+          <p class="mc-p white">MaaCare is not just an app — it's complete clinical infrastructure connecting mothers, nurses, doctors, labs, and pharmacies into one seamless ecosystem.</p>
+          <div class="inv-stat-grid">
+            <div class="inv-stat"><div class="inv-num">250M+</div><div class="inv-label">Women of reproductive age in India</div></div>
+            <div class="inv-stat"><div class="inv-num">44,000+</div><div class="inv-label">Maternal deaths/year — largely preventable</div></div>
+          <div class="inv-ctas">
+            <a href="mailto:founder@maapark.in" class="mc-btn mc-btn-primary">📩 Request Investor Deck</a>
+            <a href="https://wa.me/918876882959" target="_blank" class="mc-btn mc-btn-navy">📅 Schedule a Call</a>
+          </div>
+        </div>
+        <div>
+          <div class="inv-box">
+            <h3>🏗️ What MaaCare Has Built</h3>
+            <ul>
+              <li>📱 Live on Google Play Store — growing daily</li>
+              <li>🏗️ 21+ feature modules — fully functional</li>
+              <li>👩‍⚕️ Home nursing network — GPS &amp; OTP verified</li>
+              <li>🔒 Privacy-first period tracker — first in India</li>
+              <li>🏆 TNAI &amp; Koita Foundation Award 2025</li>
+              <li>🏛️ World Bank-awarded clinical advisory team</li>
+            </ul>
+          </div>
+          <div class="inv-box">
+            <h3>💰 Revenue Streams</h3>
+            <div class="rev-grid">
+              <div class="rev-item">💳 Monthly subscriptions</div>
+              <div class="rev-item">📹 Per-consultation fees</div>
+              <div class="rev-item">🏠 Nurse visit commissions</div>
+              <div class="rev-item">🧪 Lab test margins</div>
+              <div class="rev-item">💊 E-pharmacy sales</div>
+              <div class="rev-item">📦 Care kit subscriptions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Privacy Policy Section -->
+    <section class="section privacy" id="privacy">
+        <div class="section-container">
+            <div class="section-header" style="text-align: center;">
+                <span class="mc-badge teal" style="margin-bottom:0.8rem;"><i class="fa-solid fa-shield-halved"></i> DPDP 2023 &amp; GDPR Compliant</span>
+                <h2 style="color: #0f172a; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800;">Privacy Policy for MaaCare</h2>
+                <div class="divider" style="margin: 0.8rem auto 1.5rem;"></div>
+                <p style="font-size: 1.05rem; color: #334155; max-width: 780px; margin: 0 auto; line-height: 1.7;">At Maa Park, your trust means everything. This policy explains how we collect, use, and protect your personal data securely, fully complying with Digital Personal Data Protection (DPDP) Act 2023 and GDPR guidelines.</p>
+                <p style="font-size: 0.85rem; color: #0d9488; margin-top: 0.8rem; font-weight: 700;">Last Updated: April 23, 2026 · End-to-End Encrypted</p>
+            </div>
+
+            <div class="privacy-grid">
+                <!-- Card 1 -->
+                <div class="privacy-block">
+                    <div class="privacy-icon"><i class="fa-solid fa-database"></i></div>
+                    <h4 class="privacy-title">1. Data We Collect</h4>
+                    <ul class="privacy-list">
+                        <li><strong>Personal:</strong> Name, age, email, phone.</li>
+                        <li><strong>Health:</strong> Pregnancy stage, mood, health vitals.</li>
+                        <li><strong>Baby Care:</strong> Growth stats, nutrition &amp; vaccines.</li>
+                        <li><strong>UGC:</strong> Anonymous community forum posts.</li>
+                    </ul>
+                </div>
+                <!-- Card 2 -->
+                <div class="privacy-block">
+                    <div class="privacy-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+                    <h4 class="privacy-title">2. How We Use Data</h4>
+                    <ul class="privacy-list">
+                        <li>Personalize AI chat &amp; doctor recommendations.</li>
+                        <li>Secure in-app doctor video consultations.</li>
+                        <li>Daily mood, vaccination &amp; medication alerts.</li>
+                        <li>Aggregated clinical metrics to improve care.</li>
+                    </ul>
+                </div>
+                <!-- Card 3 -->
+                <div class="privacy-block">
+                    <div class="privacy-icon"><i class="fa-solid fa-lock"></i></div>
+                    <h4 class="privacy-title">3. Data Security &amp; Storage</h4>
+                    <ul class="privacy-list">
+                        <li>Encrypted MongoDB Atlas cloud database on AWS.</li>
+                        <li>ZEGOCLOUD end-to-end encrypted video.</li>
+                        <li>PCI-DSS compliant payments via Razorpay.</li>
+                        <li>Strict HTTPS/TLS 1.3 encryption in transit.</li>
+                    </ul>
+                </div>
+                <!-- Card 4 -->
+                <div class="privacy-block">
+                    <div class="privacy-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h4 class="privacy-title">4. Your Rights (DPDP &amp; GDPR)</h4>
+                    <ul class="privacy-list">
+                        <li><strong>Access &amp; Portability:</strong> Export health history.</li>
+                        <li><strong>Correction:</strong> Update medical profile anytime.</li>
+                        <li><strong>Erasure:</strong> Permanent one-click account deletion.</li>
+                        <li><strong>Anonymity:</strong> 100% anonymous peer support forums.</li>
+                    </ul>
+                </div>
+                <!-- Card 5 -->
+                <div class="privacy-block">
+                    <div class="privacy-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h4 class="privacy-title">5. Trusted Third Parties</h4>
+                    <ul class="privacy-list">
+                        <li><strong>ZEGOCLOUD &amp; Razorpay:</strong> Video &amp; Payments.</li>
+                        <li><strong>AWS &amp; MongoDB Atlas:</strong> Cloud &amp; DB Storage.</li>
+                        <li><strong>OneSignal:</strong> Critical Vaccination Reminders.</li>
+                        <li><strong>Zero Third-Party Ad Trackers:</strong> We never sell data.</li>
+                    </ul>
+                </div>
+                <!-- Card 6 -->
+                <div class="privacy-block">
+                    <div class="privacy-icon"><i class="fa-solid fa-children"></i></div>
+                    <h4 class="privacy-title">6. Child Data Protection</h4>
+                    <p style="color: #334155; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">MaaCare accounts are intended for adult mothers &amp; guardians (18+). Baby health logs are maintained strictly within the guardian's encrypted account for paediatric care.</p>
+                </div>
+            </div>
+
+            <div class="privacy-contact">
+                <h4 style="color: #0d9488; margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 800;"><i class="fa-solid fa-envelope-circle-check"></i> 7. Grievance Officer &amp; Compliance</h4>
+                <p style="color: #334155; font-size: 0.95rem; margin-bottom: 0;">Email: <strong style="color: #0f766e;">support@maapark.in</strong> &nbsp;|&nbsp; Grievance Officer: <strong style="color: #0f172a;">Manirul Hussain</strong> &nbsp;|&nbsp; Response Time: <strong style="color: #0d9488;">Within 48 hours</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Collaboration Section -->
+    <section class="section contact" id="contact">
+        <div class="section-container grid-2">
+            <div class="contact-info">
+                <h2>Collaborate With Us</h2>
+                <div class="divider"></div>
+                <p>Whether you're a healthcare provider, investor, or technology partner, Maa Park is open to
+                    collaborations that advance our mission.</p>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-envelope"></i> info@maapark.in</li>
+                    <li><i class="fa-brands fa-whatsapp" style="color: #10b981;"></i> <strong>Help Centre:</strong> <a href="https://wa.me/918876882959" target="_blank" style="color:inherit; text-decoration:none;">+91 88768 82959</a></li>
+                    <li><i class="fa-solid fa-phone"></i> +91 70866 01862</li>
+                    <li><i class="fa-solid fa-location-dot"></i> Tech Hub, Innovation City</li>
+                </ul>
+            </div>
+            <div class="contact-form-container" style="animation-delay: 0.2s;">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message / Collaboration Idea</label>
+                        <textarea id="message" rows="4" required placeholder="How can we work together?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ NEW: EXPANDED FOOTER ═══ -->
+  <footer id="site-footer">
+    <div class="footer-mega">
+      <div class="footer-mega-col">
+        <div class="f-brand-name">🌿 Maa Park</div>
+        <p class="f-tagline">India's most complete maternal &amp; women's health platform. Built with ❤️ in Assam, India.</p>
+        <a href="https://play.google.com/store/apps/details?id=co.maacare.app" target="_blank" class="f-playstore-btn"><i class="fa-brands fa-google-play"></i> Download on Play Store</a>
+        <a href="https://wa.me/918876882959" target="_blank" class="f-wa-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+        <a href="mailto:info@maapark.in">📧 info@maapark.in</a>
+        <div style="display:flex;gap:0.7rem;margin-top:1rem;flex-wrap:wrap;">
+          <a href="https://whatsapp.com/channel/0029VbD8GjLHLHQgOzwPFq0" target="_blank" style="color:var(--text-muted)!important;font-size:1.3rem;"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/maacare.co" target="_blank" style="color:var(--text-muted)!important;font-size:1.3rem;"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/maa-care-19b443405" target="_blank" style="color:var(--text-muted)!important;font-size:1.3rem;"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61564804027983" target="_blank" style="color:var(--text-muted)!important;font-size:1.3rem;"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://youtube.com/@tathyayatra-sx6sg" target="_blank" style="color:var(--text-muted)!important;font-size:1.3rem;"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-mega-col">
+        <h4>For Users</h4>
+        <a href="#audience">Period Tracker</a>
+        <a href="#audience">Pregnancy Care</a>
+        <a href="#audience">Postpartum Care</a>
+        <a href="#audience">Child Health</a>
+        <a href="#sos">SOS Emergency</a>
+        <a href="#pricing">Pricing Plans</a>
+      </div>
+      <div class="footer-mega-col">
+        <h4>For Providers</h4>
+        <a href="mailto:contact@maapark.in">Join as Doctor</a>
+        <a href="mailto:contact@maapark.in">Join as Nurse</a>
+        <a href="mailto:contact@maapark.in">Lab Partnership</a>
+        <a href="mailto:contact@maapark.in">Pharmacy Partner</a>
+        <a href="#investor">For Investors</a>
+        <a href="championship.html">Nursing Championship</a>
+      </div>
+      <div class="footer-mega-col">
+        <h4>Company</h4>
+        <a href="#about">About Maa Park</a>
+        <a href="#team">Our Team</a>
+        <a href="https://maacare.co" target="_blank">Web App (maacare.co)</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#contact">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom-bar">
+      <div class="footer-bottom-inner">
+        <span>© 2026 Maa Park Company. All rights reserved. Made with ❤️ in Assam, India.</span>
+        <div class="footer-badges">
+          <span class="f-badge">DPDP 2023 Compliant</span>
+          <span class="f-badge">End-to-End Encrypted</span>
+          <span class="f-badge">🏆 TNAI Award Winner</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js?v=3.0-google-ui"></script>
+
+  <!-- ═══ NEW: WhatsApp Floating Button ═══ -->
+  <a id="wa-float" href="https://wa.me/918876882959" target="_blank" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    /* ─── Tab Switching ─── */
+    function mcTab(tabName, btn) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      var pane = document.getElementById('pane-' + tabName);
+      if (pane) pane.classList.add('active');
+      if (btn) btn.classList.add('active');
+    }
+    /* ─── Scroll Reveal ─── */
+    (function() {
+      var ro = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); ro.unobserve(entry.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.reveal').forEach(function(el) { ro.observe(el); });
+      });
+    })();
+    /* ─── Smooth Scroll ─── */
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var t = document.querySelector(this.getAttribute('href'));
+          if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        });
+      });
+    });
+  </script>
+
+
+  <script>
+    /* ── Nurse Pricing Widget ── */
+    (function npwInit() {
+      var PRICES = { 1: 49, 2: 59, 3: 69, 4: 89, 5: 99 };
+      var LABELS = {
+        1: '1★ Fresher Nurse • 1 Session (30 min)',
+        2: '2★ Junior Nurse • 1 Session (30 min)',
+        3: '3★ Experienced Nurse • 1 Session (30 min)',
+        4: '4★ Senior Nurse • 1 Session (30 min)',
+        5: '5★ Top Rated Nurse • 1 Session (30 min)'
+      };
+      var PROGRESS = { 1: 10, 2: 30, 3: 50, 4: 75, 5: 100 };
+      var currentRating = 3;
+
+      function setRating(r) {
+        currentRating = r;
+        // Stars
+        document.querySelectorAll('.npw-star').forEach(function(s) {
+          s.classList.toggle('active', parseInt(s.dataset.r) <= r);
+        });
+        // Price
+        var amtEl = document.getElementById('npw-amount');
+        amtEl.textContent = '₹' + PRICES[r];
+        amtEl.classList.remove('flash');
+        void amtEl.offsetWidth; // reflow to restart animation
+        amtEl.classList.add('flash');
+        // Label
+        document.getElementById('npw-label').textContent = LABELS[r];
+        // Progress bar
+        document.getElementById('npw-fill').style.width = PROGRESS[r] + '%';
+        // Tiers
+        document.querySelectorAll('.npw-tier').forEach(function(t) {
+          t.classList.toggle('current', parseInt(t.dataset.t) === r);
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Star click
+        document.querySelectorAll('.npw-star').forEach(function(s) {
+          s.addEventListener('click', function() { setRating(parseInt(s.dataset.r)); });
+          s.addEventListener('mouseenter', function() {
+            var hr = parseInt(s.dataset.r);
+            document.querySelectorAll('.npw-star').forEach(function(x) {
+              x.style.filter = parseInt(x.dataset.r) <= hr ? 'none' : 'grayscale(1) brightness(1.4)';
+            });
+          });
+        });
+        document.getElementById('npw-stars') && document.getElementById('npw-stars').addEventListener('mouseleave', function() {
+          setRating(currentRating);
+        });
+        // Tier click
+        document.querySelectorAll('.npw-tier').forEach(function(t) {
+          t.addEventListener('click', function() { setRating(parseInt(t.dataset.t)); });
+        });
+        // Init
+        setRating(3);
+      });
+    })();
+  </script>
+
+</body>
+
+</html>

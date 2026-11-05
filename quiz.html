@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Maa Park Official Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Free Clinical Quiz — National Nursing Championship 2026 | MaaCare</title>
+  <meta name="description" content="Attempt the free 5-question clinical quiz and discover your All-India Nursing Percentile Rank. National Clinical & Digital Health Nursing Championship 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    /* ─── Google UI Design Tokens ───────────────────────────────────────── */
+    :root {
+      --brand-primary: #1a73e8;
+      --brand-secondary: #1557b0;
+      --brand-accent: #1e8e3e;
+      --brand-accent2: #d93025;
+      --brand-gold: #f9ab00;
+      --bg-deep: #f8f9fa;
+      --bg-card: #ffffff;
+      --bg-surface: #ffffff;
+      --bg-glass: #e8f0fe;
+      --text-primary: #202124;
+      --text-secondary: #3c4043;
+      --text-muted: #5f6368;
+      --border: #dadce0;
+      --border-light: #e8eaed;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow-glow: 0 1px 3px rgba(60,64,67,0.15);
+      --shadow-card: 0 1px 3px rgba(60,64,67,0.12), 0 1px 2px rgba(60,64,67,0.24);
+      --transition: all 0.2s ease;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── Animated Background ───────────────────────────────────────────── */
+    .bg-orbs { display: none; }
+
+    /* ─── Main Container ────────────────────────────────────────────────── */
+    .container {
+      position: relative; z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 24px 16px 80px;
+    }
+
+    /* ─── Header ────────────────────────────────────────────────────────── */
+    .header {
+      text-align: center;
+      padding: 32px 0 24px;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg-glass);
+      border: 1px solid #d2e3fc;
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+      text-transform: uppercase; color: var(--brand-primary);
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-primary);
+      -webkit-text-fill-color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+    .header p {
+      color: var(--text-secondary); font-size: 14px; line-height: 1.6;
+    }
+    .stat-row {
+      display: flex; justify-content: center; gap: 16px;
+      margin-top: 20px; flex-wrap: wrap;
+    }
+    .stat-item {
+      display: flex; flex-direction: column; align-items: center;
+      background: #ffffff; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 18px;
+      box-shadow: 0 1px 2px rgba(60,64,67,0.08);
+    }
+    .stat-val { font-size: 18px; font-weight: 800; color: var(--brand-primary); }
+    .stat-lbl { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+    /* ─── Progress Bar ──────────────────────────────────────────────────── */
+    .progress-wrap { margin: 28px 0 20px; }
+    .progress-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 8px; font-size: 12px; color: var(--text-secondary);
+    }
+    .progress-meta .q-counter { font-weight: 700; color: var(--brand-secondary); font-size: 14px; }
+    .progress-meta .q-topic {
+      background: var(--bg-glass); border: 1px solid var(--border);
+      border-radius: 100px; padding: 3px 10px;
+      font-size: 11px; color: var(--brand-accent); font-weight: 600; letter-spacing: 0.5px;
+    }
+    .progress-track {
+      width: 100%; height: 6px; background: var(--bg-surface);
+      border-radius: 100px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+      border-radius: 100px;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+      position: relative; overflow: hidden;
+    }
+    .progress-fill::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
+
+    /* ─── Question Card ─────────────────────────────────────────────────── */
+    .quiz-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-card);
+      animation: card-in 0.3s ease;
+    }
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .q-number {
+      font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px;
+      text-transform: uppercase; margin-bottom: 12px; font-weight: 700;
+    }
+    .q-text {
+      font-size: clamp(15px, 3vw, 17px); line-height: 1.65;
+      font-weight: 600; color: var(--text-primary); margin-bottom: 24px;
+    }
+    .options-grid { display: flex; flex-direction: column; gap: 10px; }
+    .option-btn {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      cursor: pointer; transition: var(--transition);
+      text-align: left; color: var(--text-primary);
+      font-family: inherit; font-size: 14px; line-height: 1.5;
+      position: relative; overflow: hidden;
+    }
+    .option-btn:hover {
+      border-color: var(--brand-primary);
+      background: var(--bg-deep);
+    }
+    .option-letter {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: #f1f3f4;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--text-primary);
+      transition: var(--transition);
+    }
+    .option-btn.selected {
+      border-color: var(--brand-primary);
+      background: #e8f0fe;
+      color: var(--brand-primary);
+    }
+    .option-btn.selected .option-letter {
+      background: var(--brand-primary); color: #fff; border-color: var(--brand-primary);
+    }
+    .option-btn.correct {
+      border-color: var(--brand-accent); background: #e6f4ea;
+      pointer-events: none;
+    }
+    .option-btn.correct .option-letter { background: var(--brand-accent); color: #fff; border-color: var(--brand-accent); }
+    .option-btn.incorrect {
+      border-color: var(--brand-accent2); background: #fce8e6;
+      pointer-events: none;
+    }
+    .option-btn.incorrect .option-letter { background: var(--brand-accent2); color: #fff; border-color: var(--brand-accent2); }
+    .option-btn.disabled { pointer-events: none; opacity: 0.7; }
+
+    /* ─── Explanation Box ───────────────────────────────────────────────── */
+    .explanation {
+      margin-top: 16px; padding: 14px 16px;
+      background: #e6f4ea;
+      border: 1px solid #ceead6;
+      border-radius: var(--radius-sm);
+      font-size: 13px; color: var(--text-secondary); line-height: 1.6;
+      animation: fade-in 0.3s ease;
+      display: none;
+    }
+    .explanation.show { display: block; }
+    .explanation strong { color: var(--brand-accent); }
+    @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+    /* ─── Next Button ───────────────────────────────────────────────────── */
+    .btn-next {
+      display: block; width: 100%;
+      margin-top: 20px; padding: 14px;
+      background: var(--brand-primary);
+      border: none; border-radius: var(--radius-sm);
+      color: #fff; font-family: inherit; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: var(--transition);
+      opacity: 0; pointer-events: none;
+      box-shadow: 0 1px 3px rgba(60,64,67,0.3);
+    }
+    .btn-next.active { opacity: 1; pointer-events: all; }
+    .btn-next:hover { background: var(--brand-secondary); box-shadow: 0 2px 6px rgba(60,64,67,0.25); }
+    .btn-next:active { transform: translateY(0); }
+
+    /* ─── Timer (per question) ──────────────────────────────────────────── */
+    .q-timer {
+      display: flex; justify-content: flex-end; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .q-timer .time-val { font-weight: 700; color: var(--brand-primary); font-variant-numeric: tabular-nums; }
+    .q-timer.urgent .time-val { color: var(--brand-accent2); animation: pulse 0.5s ease infinite alternate; }
+    @keyframes pulse { from { opacity: 1; } to { opacity: 0.5; } }
+
+    /* ─── Hard Gate Modal ───────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(32,33,36,0.6);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show { opacity: 1; pointer-events: all; }
+    .modal {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%; max-width: 500px;
+      padding: 32px 28px;
+      box-shadow: 0 8px 32px rgba(60,64,67,0.25);
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      max-height: 90vh; overflow-y: auto;
+      color: var(--text-primary);
+    }
+    .modal-overlay.show .modal { transform: translateY(0); }
+
+    .gate-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fef7e0;
+      border: 1px solid #f9ab00;
+      border-radius: 100px; padding: 5px 14px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+      color: #b06000; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .gate-score {
+      font-family: 'Inter', sans-serif;
+      font-size: 48px; font-weight: 800;
+      line-height: 1;
+      color: var(--brand-primary);
+      margin: 8px 0 4px;
+    }
+    .gate-score-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+    .gate-headline {
+      font-size: clamp(18px, 4vw, 22px); font-weight: 700;
+      line-height: 1.3; margin-bottom: 8px; color: var(--text-primary);
+    }
+    .gate-sub { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
+
+    /* Blurred rank preview */
+    .rank-preview {
+      position: relative; margin-bottom: 20px; border-radius: var(--radius-sm); overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .rank-preview canvas { width: 100% !important; border-radius: var(--radius-sm); }
+    .rank-blur-overlay {
+      position: absolute; inset: 0;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.7);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .rank-blur-overlay .lock-icon { font-size: 32px; }
+    .rank-blur-overlay p { font-size: 13px; color: var(--text-primary); font-weight: 600; }
+
+    /* Lead form */
+    .gate-form { display: flex; flex-direction: column; gap: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label {
+      font-size: 12px; font-weight: 600; color: var(--text-secondary);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .form-group input, .form-group select {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      color: var(--text-primary);
+      font-family: inherit; font-size: 14px;
+      transition: var(--transition);
+      outline: none; -webkit-appearance: none; appearance: none;
+    }
+    .form-group input::placeholder { color: var(--text-muted); }
+    .form-group input:focus, .form-group select:focus {
+      border-color: var(--brand-primary);
+      box-shadow: 0 0 0 2px var(--bg-glass);
+    }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #ffffff; color: var(--text-primary); }
+    .form-error { font-size: 11px; color: var(--brand-accent2); margin-top: 2px; display: none; }
+    .form-error.show { display: block; }
+
+    .btn-gate {
+      margin-top: 8px; padding: 14px;
+      background: var(--brand-primary);
+      border: none; border-radius: var(--radius-sm);
+      color: #fff; font-family: inherit; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(60,64,67,0.3);
+      position: relative; overflow: hidden;
+    }
+    .btn-gate:hover { background: var(--brand-secondary); box-shadow: 0 2px 6px rgba(60,64,67,0.25); }
+    .btn-gate:disabled { opacity: 0.6; pointer-events: none; }
+    .gate-price {
+      text-align: center; font-size: 12px; color: var(--text-muted);
+      margin-top: 10px; line-height: 1.6;
+    }
+    .gate-price strong { color: var(--brand-primary); }
+
+    /* ─── Result Panel (post lead submit) ──────────────────────────────── */
+    .result-panel { display: none; }
+    .result-panel.show { display: block; animation: card-in 0.5s ease; }
+    .percentile-display {
+      text-align: center; padding: 20px 0;
+    }
+    .percentile-big {
+      font-family: 'Inter', sans-serif;
+      font-size: 56px; font-weight: 800; line-height: 1;
+      color: var(--brand-primary);
+    }
+    .percentile-label {
+      font-size: 16px; font-weight: 700; color: var(--text-primary); margin-top: 6px;
+    }
+    .chart-container {
+      position: relative; height: 180px; margin: 20px 0;
+      background: #ffffff; border-radius: var(--radius-sm);
+      padding: 12px; border: 1px solid var(--border);
+    }
+    .share-section { margin-top: 20px; }
+    .share-label {
+      font-size: 12px; color: var(--text-muted); text-align: center; margin-bottom: 12px;
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;
+    }
+    .btn-whatsapp {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 14px;
+      background: #25D366;
+      border: none; border-radius: var(--radius-sm);
+      color: #fff; font-family: inherit; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(37,211,102,0.4);
+      text-decoration: none;
+    }
+    .btn-whatsapp:hover { background: #1ebe5d; }
+    .btn-whatsapp svg { flex-shrink: 0; }
+
+    .btn-register {
+      display: block; width: 100%; padding: 14px;
+      background: var(--brand-primary);
+      border: none; border-radius: var(--radius-sm);
+      color: #fff; font-family: inherit; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: var(--transition); text-decoration: none;
+      text-align: center; margin-top: 12px;
+      box-shadow: 0 1px 3px rgba(60,64,67,0.3);
+    }
+    .btn-register:hover { background: var(--brand-secondary); }
+    .copy-link-row {
+      display: flex; gap: 8px; margin-top: 10px;
+    }
+    .copy-link-input {
+      flex: 1; background: #f8f9fa; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 10px 12px;
+      color: var(--text-primary); font-size: 12px; font-family: 'Inter', monospace;
+      outline: none; user-select: all;
+    }
+    .btn-copy {
+      padding: 10px 14px; background: #e8f0fe; border: 1px solid #d2e3fc;
+      border-radius: var(--radius-sm); color: var(--brand-primary); font-family: inherit;
+      font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap;
+      transition: var(--transition);
+    }
+    .btn-copy:hover { background: #d2e3fc; }
+    .copy-confirm { font-size: 11px; color: var(--brand-accent); text-align: center; margin-top: 6px; display: none; }
+    .copy-confirm.show { display: block; animation: fade-in 0.2s ease; }
+
+    /* ─── Completion Screen ─────────────────────────────────────────────── */
+    .completion-screen { display: none; text-align: center; padding: 40px 20px; }
+    .completion-screen.show { display: block; animation: card-in 0.5s ease; }
+    .completion-screen .trophy { font-size: 64px; margin-bottom: 16px; }
+
+    /* ─── Responsive ────────────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .stat-row { gap: 12px; }
+      .modal { padding: 24px 18px; }
+      .quiz-card { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="badge">🏆 Free Clinical Assessment</div>
+    <h1>National Clinical &amp; Digital Health<br>Nursing Championship 2026</h1>
+    <p>5 rapid clinical MCQs across OBG, Pharmacology, Emergency &amp; Digital Health.<br>
+    Discover your All-India Nursing Percentile Rank in under 3 minutes.</p>
+    <div class="stat-row">
+      <div class="stat-item"><span class="stat-val">12,000+</span><span class="stat-lbl">Candidates</span></div>
+      <div class="stat-item"><span class="stat-val">29</span><span class="stat-lbl">States</span></div>
+      <div class="stat-item"><span class="stat-val">₹99</span><span class="stat-lbl">Entry Fee</span></div>
+    </div>
+  </header>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-meta">
+      <span class="q-counter" id="qCounter">Question 1 of 5</span>
+      <span class="q-topic" id="qTopic">OBG</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- Question Timer -->
+  <div class="q-timer" id="qTimer">
+    <span>⏱</span>
+    <span>Time left:</span>
+    <span class="time-val" id="timerVal">45s</span>
+  </div>
+
+  <!-- Quiz Card -->
+  <div class="quiz-card" id="quizCard">
+    <div class="q-number" id="qNum">QUESTION 1</div>
+    <p class="q-text" id="qText">Loading question…</p>
+    <div class="options-grid" id="optionsGrid"></div>
+    <div class="explanation" id="explanation"></div>
+    <button class="btn-next" id="btnNext" aria-label="Next question">Next Question →</button>
+  </div>
+
+</div>
+
+<!-- ─── Hard Gate Modal ──────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="gateModal" role="dialog" aria-modal="true" aria-label="Unlock your full score">
+  <div class="modal">
+
+    <!-- Blurred rank preview (shown before form submit) -->
+    <div id="gateFormView">
+      <div class="gate-badge">🔒 Score Locked</div>
+      <div style="text-align:center;">
+        <div class="gate-score" id="gateScoreDisplay">--/5</div>
+        <div class="gate-score-label">Your Raw Score</div>
+      </div>
+
+      <div class="rank-preview" id="rankPreview">
+        <canvas id="previewChart" height="140"></canvas>
+        <div class="rank-blur-overlay">
+          <span class="lock-icon">🔒</span>
+          <p>Your rank is locked</p>
+        </div>
+      </div>
+
+      <h2 class="gate-headline">You scored in the <span style="color:var(--brand-gold)">Top 10%</span> of All-India!</h2>
+      <p class="gate-sub">Enter your details to unlock your full <strong>All-India CBT Percentile Rank &amp; Merit Profile</strong> — and secure your spot in the championship.</p>
+
+      <form class="gate-form" id="leadForm" novalidate>
+        <div class="form-group">
+          <label for="f-name">Full Name *</label>
+          <input type="text" id="f-name" placeholder="e.g. Priyanka Sharma" autocomplete="name" maxlength="100" />
+          <span class="form-error" id="err-name">Please enter your full name.</span>
+        </div>
+        <div class="form-group">
+          <label for="f-wa">WhatsApp Number *</label>
+          <input type="tel" id="f-wa" placeholder="10-digit mobile number" maxlength="10" inputmode="numeric" />
+          <span class="form-error" id="err-wa">Enter a valid 10-digit Indian number.</span>
+        </div>
+        <div class="form-group">
+          <label for="f-college">College / Institution *</label>
+          <input type="text" id="f-college" placeholder="e.g. Gauhati Medical College" maxlength="150" />
+          <span class="form-error" id="err-college">Please enter your college name.</span>
+        </div>
+        <div class="form-group">
+          <label for="f-state">State *</label>
+          <select id="f-state">
+            <option value="">— Select State —</option>
+            <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+            <option>Bihar</option><option>Chhattisgarh</option><option>Delhi</option>
+            <option>Goa</option><option>Gujarat</option><option>Haryana</option>
+            <option>Himachal Pradesh</option><option>Jharkhand</option><option>Karnataka</option>
+            <option>Kerala</option><option>Madhya Pradesh</option><option>Maharashtra</option>
+            <option>Manipur</option><option>Meghalaya</option><option>Mizoram</option>
+            <option>Nagaland</option><option>Odisha</option><option>Puducherry</option>
+            <option>Punjab</option><option>Rajasthan</option><option>Sikkim</option>
+            <option>Tamil Nadu</option><option>Telangana</option><option>Tripura</option>
+            <option>Uttar Pradesh</option><option>Uttarakhand</option><option>West Bengal</option>
+            <option>Jammu & Kashmir</option><option>Ladakh</option><option>Other</option>
+          </select>
+          <span class="form-error" id="err-state">Please select your state.</span>
+        </div>
+        <button type="submit" class="btn-gate" id="btnGate">
+          🔓 Unlock My Score &amp; Register for ₹99
+        </button>
+        <p class="gate-price">
+          ₹99 entry secures your All-India CBT slot · Includes merit certificate<br>
+          <strong>100% refund</strong> if you refer 3 paid registrants
+        </p>
+      </form>
+    </div>
+
+    <!-- Result panel (shown after form submit) -->
+    <div class="result-panel" id="resultPanel">
+      <div class="percentile-display">
+        <div class="percentile-big" id="percentileBig">--</div>
+        <div class="percentile-label" id="percentileLabel">Percentile</div>
+        <p style="font-size:13px;color:var(--text-secondary);margin-top:8px;">
+          You outperformed <span id="percentileText" style="color:var(--brand-accent);font-weight:700;">--</span> of all quiz takers nationwide!
+        </p>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="mainChart"></canvas>
+      </div>
+
+      <div class="share-section">
+        <p class="share-label">📣 Share Your Score &amp; Earn ₹20/Referral</p>
+        <a id="whatsappShareBtn" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M16 2C8.27 2 2 8.27 2 16c0 2.5.68 4.84 1.86 6.87L2 30l7.31-1.83A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm7.24 19.76c-.3.84-1.77 1.62-2.44 1.72-.63.1-1.43.14-2.3-.14-.53-.17-1.22-.4-2.1-.78-3.69-1.6-6.1-5.33-6.28-5.58-.17-.24-1.38-1.83-1.38-3.5 0-1.66.87-2.48 1.18-2.82.3-.33.66-.41.88-.41.22 0 .44.01.63.01.2 0 .47-.08.74.56.28.65.94 2.3 1.02 2.47.08.17.14.37.03.6-.1.23-.15.37-.3.57-.14.2-.3.44-.43.59-.14.16-.28.33-.12.65.16.32.72 1.18 1.54 1.91 1.06.94 1.95 1.23 2.27 1.37.32.14.5.12.69-.07.19-.19.8-.93.99-1.25.19-.32.38-.27.63-.16.26.1 1.66.78 1.94.93.28.14.47.21.54.33.07.12.07.67-.23 1.5z"/>
+          </svg>
+          Share on WhatsApp
+        </a>
+        <div class="copy-link-row">
+          <input type="text" class="copy-link-input" id="copyLinkInput" readonly />
+          <button class="btn-copy" id="btnCopyLink">Copy Link</button>
+        </div>
+        <p class="copy-confirm" id="copyConfirm">✓ Copied to clipboard!</p>
+
+        <a id="btnRegister" class="btn-register" href="#" target="_blank">
+          🏆 Register Now for ₹99 — Secure Your Slot
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ─── Quiz Data ─────────────────────────────────────────────────────────────────
+const QUESTIONS = [
+  {
+    topic: 'OBG',
+    text: 'A primigravida at 38 weeks gestation presents with BP 160/110 mmHg, facial oedema, and proteinuria (3+). The MOST immediate nursing priority is:',
+    options: [
+      { id: 'A', text: 'Administer oral antihypertensive and reassess in 1 hour' },
+      { id: 'B', text: 'Place patient in left lateral position, initiate IV access, and prepare for MgSO₄ administration' },
+      { id: 'C', text: 'Perform immediate foetal non-stress test (NST) and document' },
+      { id: 'D', text: 'Encourage oral fluids and bed rest to reduce oedema' },
+    ],
+    correct: 'B',
+    explanation: '<strong>Correct: B.</strong> Severe pre-eclampsia requires immediate lateral positioning (to reduce aortocaval compression), IV access for MgSO₄ (seizure prophylaxis), and urgent antihypertensives. MgSO₄ is the drug of choice for seizure prevention in severe pre-eclampsia.',
+  },
+  {
+    topic: 'Pharmacology',
+    text: 'A patient on warfarin for atrial fibrillation has an INR of 8.2 with active gum bleeding. Which nursing intervention is MOST appropriate FIRST?',
+    options: [
+      { id: 'A', text: 'Administer fresh frozen plasma (FFP) immediately per standing order' },
+      { id: 'B', text: 'Hold warfarin, apply pressure to gum bleeding, notify physician, and prepare Vitamin K IV' },
+      { id: 'C', text: 'Double the next warfarin dose to stabilise INR faster' },
+      { id: 'D', text: 'Administer protamine sulphate as warfarin reversal agent' },
+    ],
+    correct: 'B',
+    explanation: '<strong>Correct: B.</strong> An INR of 8.2 with active bleeding = warfarin toxicity. First line: hold warfarin, control local bleeding, and administer Vitamin K (phytomenadione). Protamine sulphate reverses heparin, not warfarin. FFP is reserved for life-threatening haemorrhage.',
+  },
+  {
+    topic: 'Emergency',
+    text: 'During rapid triage, a 28-year-old motorcyclist arrives unresponsive with paradoxical chest wall movement on the left, absent breath sounds on the left, and tracheal deviation to the right. The nurse should IMMEDIATELY:',
+    options: [
+      { id: 'A', text: 'Place a non-rebreather mask at 15 L/min and reassess in 5 minutes' },
+      { id: 'B', text: 'Position the patient in left lateral decubitus and monitor oxygen saturation' },
+      { id: 'C', text: 'Prepare for and assist with emergency needle thoracostomy (2nd ICS, MCL)' },
+      { id: 'D', text: 'Insert a nasopharyngeal airway and obtain urgent chest X-ray' },
+    ],
+    correct: 'C',
+    explanation: '<strong>Correct: C.</strong> Tracheal deviation away from the affected side + absent breath sounds + paradoxical movement = tension pneumothorax — a life-threatening emergency. Immediate needle decompression at the 2nd intercostal space, midclavicular line is required before imaging.',
+  },
+  {
+    topic: 'Digital Health',
+    text: 'A hospital implements an AI-powered early warning system (EWS) that flags patients at high risk for sepsis. The nurse notices the system has flagged a patient whose clinical presentation does NOT match the alert. The BEST nursing response is:',
+    options: [
+      { id: 'A', text: 'Override the alert without documentation since clinical judgment supersedes AI' },
+      { id: 'B', text: 'Trust the AI alert exclusively and initiate the full sepsis bundle immediately' },
+      { id: 'C', text: 'Perform a comprehensive clinical assessment, document findings, escalate if concerned, and document the override decision' },
+      { id: 'D', text: 'Disable the EWS for this patient to prevent alert fatigue for other staff' },
+    ],
+    correct: 'C',
+    explanation: '<strong>Correct: C.</strong> AI clinical decision support tools augment — not replace — nursing judgment. The nurse must assess the patient clinically, document their reasoning, escalate if any doubt exists, and formally document any override. This reflects safe, accountable digital health practice.',
+  },
+  {
+    topic: 'Critical Care',
+    text: 'A mechanically ventilated patient in the ICU develops sudden-onset agitation, SpO₂ drop from 98% to 84%, and high-pressure alarms on the ventilator. Using the DOPE mnemonic, the nurse should FIRST assess for:',
+    options: [
+      { id: 'A', text: 'D — Displacement of the endotracheal tube' },
+      { id: 'B', text: 'O — Obstruction of the ETT with secretions' },
+      { id: 'C', text: 'P — Pneumothorax (tension)' },
+      { id: 'D', text: 'E — Equipment failure (ventilator malfunction)' },
+    ],
+    correct: 'A',
+    explanation: '<strong>Correct: A (by systematic order).</strong> DOPE mnemonic = Displacement → Obstruction → Pneumothorax → Equipment. Tube displacement is the most immediately reversible and life-threatening cause. Verify ETT position first (symmetrical chest rise, bilateral breath sounds, waveform capnography), then proceed down the mnemonic.',
+  },
+];
+
+// ─── State ─────────────────────────────────────────────────────────────────────
+const STATE = {
+  current: 0,
+  answers: [],
+  score: 0,
+  answered: false,
+  timerInterval: null,
+  timeLeft: 45,
+  leadSubmitted: false,
+  referralCode: null,
+  candidateName: null,
+  percentile: null,
+  leadId: null,
+};
+
+// ─── Utilities ─────────────────────────────────────────────────────────────────
+const $ = (id) => document.getElementById(id);
+const API_BASE = window.location.origin.includes('localhost') || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000'
+  : window.location.origin;
+
+function getRefCodeFromURL() {
+  return new URLSearchParams(window.location.search).get('ref') || '';
+}
+
+// ─── Render Question ───────────────────────────────────────────────────────────
+function renderQuestion(index) {
+  const q = QUESTIONS[index];
+  STATE.answered = false;
+
+  // Update progress
+  $('qCounter').textContent = `Question ${index + 1} of ${QUESTIONS.length}`;
+  $('qTopic').textContent = q.topic;
+  $('progressFill').style.width = `${(index / QUESTIONS.length) * 100}%`;
+  $('qNum').textContent = `QUESTION ${index + 1}`;
+  $('qText').textContent = q.text;
+
+  // Render options
+  const grid = $('optionsGrid');
+  grid.innerHTML = '';
+  q.options.forEach((opt) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.dataset.id = opt.id;
+    btn.setAttribute('aria-label', `Option ${opt.id}: ${opt.text}`);
+    btn.innerHTML = `<span class="option-letter">${opt.id}</span><span>${opt.text}</span>`;
+    btn.addEventListener('click', () => selectOption(opt.id, q.correct, q.explanation));
+    grid.appendChild(btn);
+  });
+
+  // Hide next button and explanation
+  $('btnNext').classList.remove('active');
+  const expEl = $('explanation');
+  expEl.classList.remove('show');
+  expEl.innerHTML = '';
+
+  // Restart timer
+  startTimer();
+
+  // Animate card
+  const card = $('quizCard');
+  card.style.animation = 'none';
+  void card.offsetHeight;
+  card.style.animation = 'card-in 0.4s cubic-bezier(0.4,0,0.2,1)';
+}
+
+// ─── Option Selection ──────────────────────────────────────────────────────────
+function selectOption(chosen, correct, explanation) {
+  if (STATE.answered) return;
+  STATE.answered = true;
+  clearInterval(STATE.timerInterval);
+
+  const isCorrect = chosen === correct;
+  if (isCorrect) STATE.score++;
+  STATE.answers.push(chosen);
+
+  // Style all buttons
+  $('optionsGrid').querySelectorAll('.option-btn').forEach((btn) => {
+    const id = btn.dataset.id;
+    btn.classList.add('disabled');
+    if (id === correct) btn.classList.add('correct');
+    else if (id === chosen && !isCorrect) btn.classList.add('incorrect');
+  });
+
+  // Show explanation
+  const expEl = $('explanation');
+  expEl.innerHTML = explanation;
+  expEl.classList.add('show');
+
+  // Show next button
+  $('btnNext').classList.add('active');
+  $('btnNext').textContent = STATE.current < QUESTIONS.length - 1
+    ? 'Next Question →'
+    : 'See My Score →';
+}
+
+// ─── Timer ─────────────────────────────────────────────────────────────────────
+function startTimer() {
+  STATE.timeLeft = 45;
+  updateTimerUI();
+  clearInterval(STATE.timerInterval);
+  STATE.timerInterval = setInterval(() => {
+    STATE.timeLeft--;
+    updateTimerUI();
+    if (STATE.timeLeft <= 0) {
+      clearInterval(STATE.timerInterval);
+      if (!STATE.answered) autoAnswer();
+    }
+  }, 1000);
+}
+
+function updateTimerUI() {
+  $('timerVal').textContent = `${STATE.timeLeft}s`;
+  const timerEl = $('qTimer');
+  timerEl.classList.toggle('urgent', STATE.timeLeft <= 10);
+}
+
+function autoAnswer() {
+  // Time up — count as wrong, move on
+  STATE.answered = true;
+  STATE.answers.push(null);
+  $('optionsGrid').querySelectorAll('.option-btn').forEach((btn) => {
+    btn.classList.add('disabled');
+    if (btn.dataset.id === QUESTIONS[STATE.current].correct) btn.classList.add('correct');
+  });
+  const expEl = $('explanation');
+  expEl.innerHTML = `⏱ <strong>Time's up!</strong> ${QUESTIONS[STATE.current].explanation}`;
+  expEl.classList.add('show');
+  $('btnNext').classList.add('active');
+  $('btnNext').textContent = STATE.current < QUESTIONS.length - 1
+    ? 'Next Question →'
+    : 'See My Score →';
+}
+
+// ─── Next Button ───────────────────────────────────────────────────────────────
+$('btnNext').addEventListener('click', () => {
+  STATE.current++;
+  if (STATE.current < QUESTIONS.length) {
+    renderQuestion(STATE.current);
+  } else {
+    showGate();
+  }
+});
+
+// ─── Draw Preview (blurred) Chart ─────────────────────────────────────────────
+let previewChartInstance = null;
+function drawPreviewChart() {
+  const ctx = $('previewChart').getContext('2d');
+  if (previewChartInstance) previewChartInstance.destroy();
+  const labels = Array.from({ length: 20 }, (_, i) => (i * 5) + '%');
+  const data = labels.map((_, i) => {
+    const x = (i / 19) * 100;
+    return Math.exp(-0.5 * Math.pow((x - 50) / 18, 2));
+  });
+  previewChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        borderColor: '#6C3FE8',
+        backgroundColor: 'rgba(108,63,232,0.15)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0,
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+      scales: { x: { display: false }, y: { display: false } },
+      animation: false,
+    },
+  });
+}
+
+// ─── Show Gate Modal ───────────────────────────────────────────────────────────
+function showGate() {
+  clearInterval(STATE.timerInterval);
+  $('progressWrap').style.display = 'none';
+  $('qTimer').style.display = 'none';
+  $('quizCard').style.display = 'none';
+
+  // Update score display
+  $('gateScoreDisplay').textContent = `${STATE.score}/5`;
+
+  // Update headline based on score
+  const pct = Math.round((STATE.score / 5) * 100);
+  const headline = $('gateFormView').querySelector('.gate-headline');
+  if (STATE.score >= 4) headline.innerHTML = `You scored in the <span style="color:var(--brand-gold)">Top 10%</span> of All-India! 🎉`;
+  else if (STATE.score >= 3) headline.innerHTML = `You scored in the <span style="color:var(--brand-secondary)">Top 30%</span> — above average! 🌟`;
+  else headline.innerHTML = `You answered <span style="color:var(--brand-accent2)">${STATE.score}/5</span> — unlock your national rank now!`;
+
+  // Show modal
+  const modal = $('gateModal');
+  modal.classList.add('show');
+
+  // Draw blurred preview chart
+  setTimeout(drawPreviewChart, 100);
+}
+
+// ─── Lead Form Submission ──────────────────────────────────────────────────────
+$('leadForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (STATE.leadSubmitted) return;
+
+  // Validate
+  const name    = $('f-name').value.trim();
+  const wa      = $('f-wa').value.trim().replace(/\s/g, '');
+  const college = $('f-college').value.trim();
+  const state   = $('f-state').value;
+
+  let valid = true;
+  const showErr = (id, errId, condition) => {
+    const errEl = $(errId);
+    errEl.classList.toggle('show', condition);
+    if (condition) valid = false;
+    return condition;
+  };
+  showErr('f-name',    'err-name',    !name);
+  showErr('f-wa',      'err-wa',      !/^[6-9]\d{9}$/.test(wa));
+  showErr('f-college', 'err-college', !college);
+  showErr('f-state',   'err-state',   !state);
+  if (!valid) return;
+
+  const btn = $('btnGate');
+  btn.disabled = true;
+  btn.textContent = 'Unlocking…';
+
+  try {
+    const body = {
+      name, whatsapp: wa, college, state,
+      quizScore: STATE.score,
+      answers: STATE.answers,
+      referralCodeUsed: getRefCodeFromURL(),
+    };
+
+    // UTM params
+    const sp = new URLSearchParams(window.location.search);
+    if (sp.get('utm_source'))   body.utmSource   = sp.get('utm_source');
+    if (sp.get('utm_medium'))   body.utmMedium   = sp.get('utm_medium');
+    if (sp.get('utm_campaign')) body.utmCampaign = sp.get('utm_campaign');
+
+    const resp = await fetch(`${API_BASE}/api/growth/lead`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await resp.json();
+
+    if (!resp.ok) throw new Error(data.error || 'Server error');
+
+    STATE.leadSubmitted = true;
+    STATE.candidateName = name;
+    STATE.percentile = data.lead?.quizPercentile ?? 72;
+    STATE.leadId = data.lead?._id;
+
+    showResult(name, STATE.percentile, data.lead?.percentileLabel);
+
+  } catch (err) {
+    console.error('Lead submit error:', err);
+    // On error, still show result for good UX (degraded mode)
+    STATE.percentile = simulatePercentileLocal(STATE.score);
+    showResult(name, STATE.percentile);
+    btn.disabled = false;
+    btn.textContent = '🔓 Unlock My Score & Register for ₹99';
+  }
+});
+
+function simulatePercentileLocal(score) {
+  const bands = { 5:[95,99], 4:[82,94], 3:[62,78], 2:[38,58], 1:[15,35], 0:[2,12] };
+  const [min, max] = bands[score] || [5,15];
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// ─── Show Result Panel ─────────────────────────────────────────────────────────
+let mainChartInstance = null;
+function showResult(name, percentile, label) {
+  // Hide form, show result
+  $('gateFormView').style.display = 'none';
+  const rp = $('resultPanel');
+  rp.classList.add('show');
+
+  // Update percentile display
+  $('percentileBig').textContent = `${percentile}th`;
+  $('percentileLabel').textContent = label || (percentile >= 90 ? 'Top 10% All-India 🏆' : 'National Percentile');
+  $('percentileText').textContent = `${percentile}%`;
+
+  // Draw main bell-curve chart with candidate marker
+  drawMainChart(percentile);
+
+  // Build referral link (use ref code from URL or a placeholder)
+  const ref = getRefCodeFromURL();
+  const quizUrl = `${window.location.origin}/quiz-teaser.html`;
+  const refLink = ref
+    ? `${quizUrl}?ref=${ref}`
+    : quizUrl;
+
+  // WhatsApp share (Module 4)
+  const waText = encodeURIComponent(
+    `🏆 I just took the National Clinical Nursing Championship 2026 Quiz and scored in the *${label || percentile + 'th percentile'}*!\n\n` +
+    `Attempt the free 5-question clinical quiz here 👇\n${refLink}\n\n` +
+    `🎓 Register for ₹99 and compete with 12,000+ nurses across India!`
+  );
+  $('whatsappShareBtn').href = `https://wa.me/?text=${waText}`;
+  $('whatsappShareBtn').addEventListener('click', () => {
+    // Track share
+    fetch(`${API_BASE}/api/growth/share`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ candidateId: STATE.leadId }),
+    }).catch(() => {});
+  });
+
+  // Copy link
+  $('copyLinkInput').value = refLink;
+
+  // Register CTA
+  const regRef = ref || '';
+  $('btnRegister').href = `/championship.html${regRef ? '?ref=' + regRef : ''}`;
+}
+
+function drawMainChart(percentile) {
+  const ctx = $('mainChart').getContext('2d');
+  if (mainChartInstance) mainChartInstance.destroy();
+
+  const numPoints = 50;
+  const labels = Array.from({ length: numPoints }, (_, i) => i * 2);
+  const bellData = labels.map((x) => Math.exp(-0.5 * Math.pow((x - 50) / 16, 2)));
+
+  // Find candidate's x position
+  const candX = percentile;
+  const candY = Math.exp(-0.5 * Math.pow((candX - 50) / 16, 2));
+
+  mainChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'All-India Distribution',
+          data: bellData,
+          borderColor: 'rgba(108,63,232,0.6)',
+          backgroundColor: (ctx) => {
+            const chart = ctx.chart;
+            const { ctx: canvasCtx, chartArea } = chart;
+            if (!chartArea) return 'rgba(108,63,232,0.15)';
+            const gradient = canvasCtx.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
+            gradient.addColorStop(0, 'rgba(108,63,232,0.05)');
+            gradient.addColorStop(0.5, 'rgba(108,63,232,0.2)');
+            gradient.addColorStop(1, 'rgba(0,212,170,0.3)');
+            return gradient;
+          },
+          fill: true,
+          tension: 0.4,
+          pointRadius: 0,
+          borderWidth: 2,
+        },
+        {
+          label: 'Your Position',
+          data: labels.map((x) => (Math.abs(x - candX) < 1.5 ? candY : null)),
+          borderColor: '#FFD700',
+          backgroundColor: '#FFD700',
+          pointRadius: 8,
+          pointHoverRadius: 10,
+          showLine: false,
+          borderWidth: 0,
+        },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => ctx.datasetIndex === 1 ? `You: ${percentile}th percentile` : '',
+          },
+          filter: (item) => item.datasetIndex === 1,
+        },
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Percentile Rank →', color: '#606080', font: { size: 11 } },
+          ticks: { color: '#606080', font: { size: 10 }, maxTicksLimit: 6, callback: (v) => `${v}%` },
+          grid: { color: 'rgba(255,255,255,0.04)' },
+        },
+        y: { display: false },
+      },
+    },
+  });
+}
+
+// ─── Copy Link ─────────────────────────────────────────────────────────────────
+$('btnCopyLink').addEventListener('click', async () => {
+  const link = $('copyLinkInput').value;
+  try {
+    await navigator.clipboard.writeText(link);
+  } catch {
+    $('copyLinkInput').select();
+    document.execCommand('copy');
+  }
+  const conf = $('copyConfirm');
+  conf.classList.add('show');
+  setTimeout(() => conf.classList.remove('show'), 2500);
+});
+
+// ─── Prevent modal close on outside click ─────────────────────────────────────
+$('gateModal').addEventListener('click', (e) => {
+  if (e.target === $('gateModal') && !STATE.leadSubmitted) {
+    // Don't allow closing before lead is submitted — it's a hard gate
+    $('gateModal').querySelector('.modal').style.animation = 'shake 0.3s ease';
+    setTimeout(() => $('gateModal').querySelector('.modal').style.animation = '', 300);
+  }
+});
+
+// Shake keyframe injected via JS
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `@keyframes shake{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateX(-6px) scale(1.01)}75%{transform:translateX(6px) scale(1.01)}}`;
+document.head.appendChild(shakeStyle);
+
+// ─── Track referral click if ?ref= present ────────────────────────────────────
+(function trackRefClick() {
+  const ref = getRefCodeFromURL();
+  if (!ref) return;
+  fetch(`${API_BASE}/api/growth/referral/click`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code: ref }),
+  }).catch(() => {});
+})();
+
+// ─── Start Quiz ────────────────────────────────────────────────────────────────
+renderQuestion(0);
+</script>
+</body>
+</html>
